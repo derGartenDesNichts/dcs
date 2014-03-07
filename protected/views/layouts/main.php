@@ -1,64 +1,95 @@
 <?php /* @var $this Controller */ ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="language" content="en" />
+    <meta charset="utf-8">
+    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-	<?php
-		// blueprint CSS framework
-		Yii::app()->clientScript
-			->registerLocalCss('screen.css', 'screen, projection')
-			->registerLocalCss('print.css',  'print');
-		
-		if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 8.') !== false) {
-			Yii::app()->clientScript->registerLocalCss('ie.css', 'screen, projection');
-		}
-		
-		Yii::app()->clientScript
-			->registerLocalCss('main.css')
-			->registerLocalCss('form.css');
-	?>
+    <?php
+    Yii::app()->bootstrap->register();
+    ?>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="/js/main.js" ></script>
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
+<div id="wrapper">
+    <div class="w1">
+        <?php
+        $this->widget('bootstrap.widgets.TbNavbar',array(
+            'items'=>array(
+                array(
+                    'class'=>'bootstrap.widgets.TbMenu',
+                    'htmlOptions'=>array('class'=>'clearfix'),
+                    'items'=>array(
+                        array('label'=>'Home', 'icon'=>'home', 'url'=>array('/site/index'), 'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Admin', 'icon'=>'cog', 'url'=>array('/admin/default/index'), 'visible'=>Yii::app()->user->isAdmin()),
+                        array('label'=>'Profile','icon'=>'user', 'url'=>array('/user/profile'), 'visible'=>!Yii::app()->user->isGuest),
+                        array('label'=>'Login', 'icon'=>'ok', 'url'=>Yii::app()->getModule('user')->loginUrl, 'visible'=>Yii::app()->user->isGuest),
+                        array('label'=>'Registration', 'icon'=>'pencil', 'url'=>Yii::app()->getModule('user')->registrationUrl, 'visible'=>Yii::app()->user->isGuest),
+                        array('label'=>'Logout ('.Yii::app()->user->name.')', 'icon'=>'off', 'url'=>Yii::app()->getModule('user')->logoutUrl, 'visible'=>!Yii::app()->user->isGuest),
+                    ),
+                ),
+            ),
+        )); ?>
 
-<div class="container" id="page">
+        <div class="container" id="page">
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
+            <?php
+            // Breadcrumbs
+            if (isset($this->breadcrumbs)) {
+                $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+                    'links' => $this->breadcrumbs,
+                    'homeLink' => false,
+                    'encodeLabel' => false,
+                ));
+            }
 
-	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
-			),
-		)); ?>
-	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
+            $this->widget('bootstrap.widgets.TbAlert', array(
+                'block'=>true, // display a larger alert block?
+                'fade'=>true, // use transitions?
+                'closeText'=>'&times;', // close link text - if set to false, no close link is displayed
+            ));
 
-	<?php echo $content; ?>
+            echo $content;
 
-	<div class="clear"></div>
+            ?>
+        </div>
+    </div>
 
-	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
-
+    <!-- footer -->
+    <footer id="footer">
+        <div class="footer-holder">
+            <div class="footer-frame">
+                <div class="container">
+                    <p> Some text bla bla </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div><!-- page -->
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
