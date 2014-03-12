@@ -74,18 +74,18 @@ class AdminController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
-	{
+	{/*
 		$model=new User;
 		$profile=new Profile;
 		$this->performAjaxValidation(array($model,$profile));
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			$model->activkey=Yii::app()->controller->module->encrypting(microtime().$model->password);
+			$model->activkey=HashHelper::phpbbHash(microtime().$model->password);
 			$profile->attributes=$_POST['Profile'];
 			$profile->user_id=0;
 			if($model->validate()&&$profile->validate()) {
-				$model->password=Yii::app()->controller->module->encrypting($model->password);
+				$model->password=HashHelper::phpbbHash($model->password);;
 				if($model->save()) {
 					$profile->user_id=$model->id;
 					$profile->save();
@@ -97,7 +97,7 @@ class AdminController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 			'profile'=>$profile,
-		));
+		));*/
 	}
 
 	/**
@@ -105,7 +105,7 @@ class AdminController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionUpdate()
-	{
+	{/*
 		$model=$this->loadModel();
 		$profile=$model->profile;
 		$this->performAjaxValidation(array($model,$profile));
@@ -129,7 +129,7 @@ class AdminController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 			'profile'=>$profile,
-		));
+		));*/
 	}
 
 
