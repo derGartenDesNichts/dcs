@@ -5,13 +5,11 @@ $this->breadcrumbs=array(
 	$this->module->id,
 );
 ?>
-<h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1>
-
-<p>
-This is the view content for action "<?php echo $this->action->id; ?>".
-The action belongs to the controller "<?php echo get_class($this); ?>"
-in the "<?php echo $this->module->id; ?>" module.
-</p>
-<p>
-You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
-</p>
+<p><a href="/user/admin/admin">Manage Users</a></p>
+<p><a href="/admin/answers/admin">Manage Answers</a></p>
+<p><a href="/admin/comments/admin">Manage Comments</a></p>
+<p><a href="/admin/delegates/admin">Manage Delegates</a></p>
+<p><a href="/admin/levels/admin">Manage Levels</a></p>
+<p><a href="/admin/linking/admin">Manage Linking</a></p>
+<p><a href="/admin/locations/admin">Manage Locations</a></p>
+<p><a href="/admin/questions/admin">Manage Questions</a></p>

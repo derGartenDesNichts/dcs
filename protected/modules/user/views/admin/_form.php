@@ -11,41 +11,30 @@
 
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
 
-	<div class="row">
 		<?php echo $form->labelEx($model,'username'); ?>
 		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
 		<?php echo $form->error($model,'username'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'password'); ?>
-	</div>
+		<?php //echo $form->labelEx($model,'password'); ?>
+		<?php //echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>128)); ?>
+		<?php //echo $form->error($model,'password'); ?>
 
-	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'email'); ?>
-	</div>
 
-	<div class="row">
 		<?php echo $form->labelEx($model,'superuser'); ?>
 		<?php echo $form->dropDownList($model,'superuser',User::itemAlias('AdminStatus')); ?>
 		<?php echo $form->error($model,'superuser'); ?>
-	</div>
 
-	<div class="row">
 		<?php echo $form->labelEx($model,'status'); ?>
 		<?php echo $form->dropDownList($model,'status',User::itemAlias('UserStatus')); ?>
 		<?php echo $form->error($model,'status'); ?>
-	</div>
-<?php 
+<?php
 		$profileFields=Profile::getFields();
 		if ($profileFields) {
 			foreach($profileFields as $field) {
 			?>
-	<div class="row">
 		<?php echo $form->labelEx($profile,$field->varname); ?>
 		<?php 
 		if ($widgetEdit = $field->widgetEdit($profile)) {
@@ -59,14 +48,13 @@
 		}
 		 ?>
 		<?php echo $form->error($profile,$field->varname); ?>
-	</div>
 			<?php
 			}
 		}
 ?>
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save')); ?>
-	</div>
+    <div class="controls">
+		<?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save'), array('class'=>'btn btn-success')); ?>
+    </div>
 
 <?php $this->endWidget(); ?>
 

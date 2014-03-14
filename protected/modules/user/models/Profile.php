@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @property integer $user_id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $second_name
+ * @property string $birthday
+ * @property string $pass_number
+*/
+
 class Profile extends UActiveRecord
 {
 	/**

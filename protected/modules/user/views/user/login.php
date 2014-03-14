@@ -1,79 +1,53 @@
 <?php
 $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
-$this->breadcrumbs=array(
-	UserModule::t("Login"),
-);
 ?>
 
-<h1><?php echo UserModule::t("Login"); ?></h1>
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    'id'=>'login-form',
+    'enableClientValidation'=>true,
+    'htmlOptions'=>array('class'=>'form-login'),
+    'clientOptions'=>array(
+        'validateOnSubmit'=>true,
+    ),
+)); /* @var $form TbActiveForm */ ?>
 
-<?php if(Yii::app()->user->hasFlash('loginMessage')): ?>
+    <h1><?php echo UserModule::t("Login"); ?></h1>
 
-<div class="success">
-	<?php echo Yii::app()->user->getFlash('loginMessage'); ?>
-</div>
+<?php if(Yii::app()->user->hasFlash('loginMessage') || Yii::app()->user->hasFlash('recoveryMessage')): ?>
+
+    <div class="success">
+        <?php echo Yii::app()->user->getFlash('loginMessage'); ?>
+        <?php echo Yii::app()->user->getFlash('recoveryMessage'); ?>
+    </div>
 
 <?php endif; ?>
 
-<p><?php echo UserModule::t("Please fill out the following form with your login credentials:"); ?></p>
+<?php echo $form->errorSummary($model, 'Following errors occurred'); ?>
 
-<div class="form">
-<?php echo CHtml::beginForm(); ?>
+    <div class="controls-row">
+        <?php echo $form->textField($model,'username', array('class'=>'input-block-level', 'placeholder'=>'Username or email')); ?>
+        <?php echo $form->error($model,'username'); ?>
+    </div>
 
-	<p class="note"><?php echo UserModule::t('Fields with <span class="required">*</span> are required.'); ?></p>
-	
-	<?php echo CHtml::errorSummary($model); ?>
-	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'username'); ?>
-		<?php echo CHtml::activeTextField($model,'username') ?>
-	</div>
-	
-	<div class="row">
-		<?php echo CHtml::activeLabelEx($model,'password'); ?>
-		<?php echo CHtml::activePasswordField($model,'password') ?>
-	</div>
-	
-	<div class="row">
-		<p class="hint">
-		<?php echo CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl); ?> | <?php echo CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl); ?>
-		</p>
-	</div>
-	
-	<div class="row rememberMe">
-		<?php echo CHtml::activeCheckBox($model,'rememberMe'); ?>
-		<?php echo CHtml::activeLabelEx($model,'rememberMe'); ?>
-	</div>
+    <div class="controls-row">
+        <?php echo $form->passwordField($model,'password', array('class'=>'input-block-level', 'placeholder'=>'Password')); ?>
+        <?php echo $form->error($model,'password'); ?>
+    </div>
 
-	<div class="row submit">
-		<?php echo CHtml::submitButton(UserModule::t("Login")); ?>
-	</div>
-	
-<?php echo CHtml::endForm(); ?>
-</div><!-- form -->
+<?php echo $form->checkBoxRow($model,'rememberMe'); ?>
 
-
-<?php
-$form = new CForm(array(
-    'elements'=>array(
-        'username'=>array(
-            'type'=>'text',
-            'maxlength'=>32,
-        ),
-        'password'=>array(
-            'type'=>'password',
-            'maxlength'=>32,
-        ),
-        'rememberMe'=>array(
-            'type'=>'checkbox',
-        )
-    ),
-
-    'buttons'=>array(
-        'login'=>array(
-            'type'=>'submit',
+    <div class="clearfix">
+        <?php $this->widget('bootstrap.widgets.TbButton', array(
+            'buttonType'=>'submit',
+            'type'=>'primary',
+            'size'=>'large',
             'label'=>'Login',
-        ),
-    ),
-), $model);
-?>
+            'htmlOptions'=>array('class'=>'pull-left'),
+        )); ?>
+        <ul class="action-links">
+            <?php //echo '<li>'.CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl).'</li>'; ?>
+            <?php echo '<li>'.CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl).'</li>'; ?>
+        </ul>
+    </div>
+
+<?php $this->endWidget(); ?>
