@@ -7,10 +7,12 @@
 
     <?php
     Yii::app()->bootstrap->register();
+    Yii::app()->clientScript->registerCssFile(Yii::app()->getBaseUrl() .'/css/styles.css');
     ?>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <script src="/js/main.js" ></script>
+
     <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 </head>

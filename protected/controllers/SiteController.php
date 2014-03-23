@@ -2,6 +2,8 @@
 
 class SiteController extends Controller
 {
+    public $defaultAction = 'home';
+    public $layout='//layouts/column2';
 	/**
 	 * Declares class-based actions.
 	 */
@@ -32,7 +34,12 @@ class SiteController extends Controller
         if(Yii::app()->user->isGuest){
 		    $this->redirect(Yii::app()->getModule('user')->loginUrl);
         }
-        else $this->render('index');
+        else
+        {
+           // $newQuestions = Questions::model()->findAllByAttributes(array('date_added'=>date('Y-m-d hh-mm-ss',strtotime('today'))));
+
+            $this->render('index');
+        }
 	}
 
 	/**

@@ -573,8 +573,8 @@ textarea{
 
 #footer{
 	background: #1dadcc;
-//	-webkit-box-shadow:0 -1px 0 1px #1dadcc;
-//	box-shadow:0 -1px 0 1px #1dadcc;
+	-webkit-box-shadow:0 -1px 0 1px #1dadcc;
+    box-shadow:0 -1px 0 1px #1dadcc;
 	text-align:center;
 	display:table-footer-group;
 	color:#fff;

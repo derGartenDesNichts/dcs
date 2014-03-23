@@ -51,7 +51,11 @@ $this->menu=array(
 			}
 		}
 ?>
-		<?php echo $form->labelEx($model,'username'); ?>
+        <?php echo $form->labelEx($profile,'avatar'); ?>
+        <?php echo $form->fileField($profile,'avatar'); ?>
+        <?php echo $form->error($profile,'avatar'); ?>
+
+        <?php echo $form->labelEx($model,'username'); ?>
 		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
 		<?php echo $form->error($model,'username'); ?>
 

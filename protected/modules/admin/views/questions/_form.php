@@ -13,7 +13,15 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 
 	<?php echo $form->textFieldRow($model,'user_id',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'level_id',array('class'=>'span5','maxlength'=>10)); ?>
+    <?php echo $form->label($model,'level_id'); ?>
+
+	<?php
+    $levels = Levels::model()->findAll();
+
+    foreach($levels as $level)
+        $levelsArr[$level->level_id] = $level->description;
+
+    echo $form->dropDownList($model,'level_id',$levelsArr);?>
 
 	<?php echo $form->textFieldRow($model,'iteration_count',array('class'=>'span5','maxlength'=>10)); ?>
 

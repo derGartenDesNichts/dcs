@@ -20,6 +20,7 @@ $config = array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+        'application.components.helpers.*',
 		
 		'ext.EScriptBoost.*',
         'application.modules.user.models.*',
