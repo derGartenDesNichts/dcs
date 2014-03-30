@@ -5,7 +5,7 @@
 $this->pageTitle=Yii::app()->name;
 
 $this->menu=array(
-    array('label'=>CHtml::image('uploads/user-full/'.Yii::app()->user->avatar), 'url'=>'#'),
+    array('label'=>CHtml::image('/../uploads/user-full/'.Yii::app()->user->avatar), 'url'=>'#'),
     array('label'=>'Profile', 'url'=>array('/user/profile')),
     array('label'=>'Propositions', 'url'=>array('#')),
     array('label'=>'Create Proposition', 'url'=>array('#')),

@@ -31,15 +31,14 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+
         if(Yii::app()->user->isGuest){
 		    $this->redirect(Yii::app()->getModule('user')->loginUrl);
         }
-        else
-        {
-           // $newQuestions = Questions::model()->findAllByAttributes(array('date_added'=>date('Y-m-d hh-mm-ss',strtotime('today'))));
-
-            $this->render('index');
+        else {
+            $this->redirect('questions/list');
         }
+
 	}
 
 	/**
