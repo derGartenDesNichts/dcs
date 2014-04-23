@@ -1,20 +1,29 @@
 <?php
-/* @var $this SiteController */
+/* @var $this SiteController
+   @var $newQuestions Questions */
 
 $this->pageTitle=Yii::app()->name;
+
+$this->menu=array(
+    array('label'=>CHtml::image('/../uploads/user-full/'.Yii::app()->user->avatar), 'url'=>'#'),
+    array('label'=>'Profile', 'url'=>array('/user/profile')),
+    array('label'=>'Propositions', 'url'=>array('#')),
+    array('label'=>'Create Proposition', 'url'=>array('#')),
+);
 ?>
-
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+<div class="clearfix">
+    <?php
+    $this->widget('bootstrap.widgets.TbTabs',array(
+       // 'htmlOptions'=>array('class'=>'clearfix'),
+        'type'=>'tabs',
+        'placement'=>'top',
+        'tabs'=>array(
+            array('label'=>'New','url'=>array('#'),'active'=>true),
+            array('label'=>'My','url'=>array('#')),
+            array('label'=>'Voted','url'=>array('#')),
+            array('label'=>'In Performing','url'=>array('#')),
+        ))
+    );
+    $this->renderPartial('/questions/new');
+    ?>
+</div>

@@ -30,14 +30,13 @@ $this->menu=array(
 
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
 
-<?php 
+<?php
 		$profileFields=Profile::getFields();
 		if ($profileFields) {
 			foreach($profileFields as $field) {
 			?>
-	<div class="row">
 		<?php echo $form->labelEx($profile,$field->varname);
-		
+
 		if ($widgetEdit = $field->widgetEdit($profile)) {
 			echo $widgetEdit;
 		} elseif ($field->range) {
@@ -48,26 +47,25 @@ $this->menu=array(
 			echo $form->textField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
 		}
 		echo $form->error($profile,$field->varname); ?>
-	</div>	
 			<?php
 			}
 		}
 ?>
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
+        <?php echo $form->labelEx($profile,'avatar'); ?>
+        <?php echo $form->fileField($profile,'avatar'); ?>
+        <?php echo $form->error($profile,'avatar'); ?>
+
+        <?php echo $form->labelEx($model,'username'); ?>
 		<?php echo $form->textField($model,'username',array('size'=>20,'maxlength'=>20)); ?>
 		<?php echo $form->error($model,'username'); ?>
-	</div>
 
-	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'email'); ?>
-	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save')); ?>
-	</div>
+    <div class="controls">
+        <?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save'), array('class'=>'btn btn-success')); ?>
+    </div>
 
 <?php $this->endWidget(); ?>
 

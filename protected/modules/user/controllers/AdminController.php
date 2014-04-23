@@ -105,7 +105,7 @@ class AdminController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionUpdate()
-	{/*
+	{
 		$model=$this->loadModel();
 		$profile=$model->profile;
 		$this->performAjaxValidation(array($model,$profile));
@@ -113,8 +113,11 @@ class AdminController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			$profile->attributes=$_POST['Profile'];
-			
-			if($model->validate()&&$profile->validate()) {
+
+            if(($profile->birthday == "0000-00-00") || (!$profile->birthday))
+                $profile->birthday = null;
+
+            if($model->validate()&&$profile->validate()) {
 				$old_password = User::model()->notsafe()->findByPk($model->id);
 				if ($old_password->password!=$model->password) {
 					$model->password=Yii::app()->controller->module->encrypting($model->password);
@@ -129,7 +132,7 @@ class AdminController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 			'profile'=>$profile,
-		));*/
+		));
 	}
 
 

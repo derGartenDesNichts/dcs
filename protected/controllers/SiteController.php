@@ -2,6 +2,8 @@
 
 class SiteController extends Controller
 {
+    public $defaultAction = 'home';
+    public $layout='//layouts/column2';
 	/**
 	 * Declares class-based actions.
 	 */
@@ -30,7 +32,13 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 
-		$this->redirect(Yii::app()->getModule('user')->loginUrl);
+        if(Yii::app()->user->isGuest){
+		    $this->redirect(Yii::app()->getModule('user')->loginUrl);
+        }
+        else {
+            $this->redirect('questions/list');
+        }
+
 	}
 
 	/**

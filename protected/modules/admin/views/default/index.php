@@ -5,13 +5,11 @@ $this->breadcrumbs=array(
 	$this->module->id,
 );
 ?>
-<h1><?php echo $this->uniqueId . '/' . $this->action->id; ?></h1>
-
-<p>
-This is the view content for action "<?php echo $this->action->id; ?>".
-The action belongs to the controller "<?php echo get_class($this); ?>"
-in the "<?php echo $this->module->id; ?>" module.
-</p>
-<p>
-You may customize this page by editing <tt><?php echo __FILE__; ?></tt>
-</p>
+<p><a href="<?php echo Yii::app()->createUrl('user/admin/admin')?>">Manage Users</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/answers/admin')?>">Manage Answers</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/comments/admin')?>">Manage Comments</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/delegates/admin')?>">Manage Delegates</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/levels/admin')?>">Manage Levels</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/linking/admin')?>">Manage Linking</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/locations/admin')?>">Manage Locations</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/questions/admin')?>">Manage Questions</a></p>

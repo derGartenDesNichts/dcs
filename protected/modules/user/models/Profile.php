@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * @property integer $user_id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $second_name
+ * @property string $birthday
+ * @property string $pass_number
+*/
+
 class Profile extends UActiveRecord
 {
 	/**
@@ -98,7 +107,10 @@ class Profile extends UActiveRecord
 			array_push($rules,array(implode(',',$numerical), 'numerical', 'integerOnly'=>true));
 			array_push($rules,array(implode(',',$float), 'type', 'type'=>'float'));
 			array_push($rules,array(implode(',',$decimal), 'match', 'pattern' => '/^\s*[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?\s*$/'));
-			self::$_rules = $rules;
+
+            array_push($rules, array('avatar', 'file', 'types'=>'jpg, gif, png', 'maxSize' => 512 * 1024, 'allowEmpty' => true, 'safe' => true));
+
+            self::$_rules = $rules;
 		}
 		return self::$_rules;
 	}
@@ -189,6 +201,108 @@ class Profile extends UActiveRecord
         if (get_class(Yii::app())=='CWebApplication'&&Profile::$regMode==false) {
             Yii::app()->user->updateSession();
         }
+// die(var_dump($this->avatar));
+        if ($this->avatar instanceof EUploadedImage) {
+            $image = $this->avatar;
+            /* @var $image EUploadedImage */
+
+            $this->setImageName($image->getName());
+            if (!$image->saveAs($this->getImagePath(true)))
+                throw new CException('Could not save user image as ' . $this->getImagePath(true));
+            $this->save(false, array('avatar'));
+        }
+
         return parent::afterSave();
+    }
+
+    /**
+     * Returns user image url.
+     * @param boolean $fullSize
+     * @return string
+     */
+    public function getImageUrl($fullSize = false)
+    {
+        return isset($this->avatar)
+            ? '../' . $this->getImageRelativePath($fullSize)
+            : '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagePath($fullSize = false)
+    {
+        return Yii::getPathOfAlias('web'). '/' . $this->getImageRelativePath($fullSize);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getImageRelativePath($fullSize = false)
+    {
+        $dir = $fullSize ? 'user-full' : 'user-thumb';
+
+        return 'uploads/' . $dir . '/' . $this->avatar;
+    }
+
+    /**
+     * Extends setAttributes to handle active date fields
+     *
+     * @param $values array
+     * @param $safeOnly boolean
+     */
+    public function setAttributes($values, $safeOnly = true)
+    {
+        if (isset($values['avatar'])) {
+            // Process avatar uploading
+            $image = $this->uploadedImage();
+            if ($image !== null)
+                $values['avatar'] = $image;
+            else
+                unset($values['avatar']);
+        }
+
+        parent::setAttributes($values, $safeOnly);
+    }
+
+    /**
+     * Returns uploaded image handler instance
+     * @return EUploadedImage
+     */
+    protected function uploadedImage()
+    {
+        Yii::import('ext.EUploadedImage');
+
+        if(! $this->validate())return null;
+
+        $image = EUploadedImage::getInstance($this, 'avatar');
+
+        if ($image !== null) {
+            $image->maxWidth = 500;
+            $image->maxHeight = 500;
+
+            $image->thumb = array(
+                'maxWidth' => 100,
+                'maxHeight' =>100,
+                'dir' => '../user-thumb',
+                'prefix' => '',
+            );
+        }
+
+        return $image;
+    }
+
+
+    /**
+     * Sets proper image name for this file.
+     */
+    public function setImageName($originalName)
+    {
+        if (($pos=strrpos($originalName,'.')) !== false)
+            $ext = (string) substr($originalName, $pos+1);
+        else
+            $ext = 'jpg';
+
+        $this->avatar = $this->user_id . '.' . $ext;
     }
 }

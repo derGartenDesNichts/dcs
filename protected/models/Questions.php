@@ -51,6 +51,8 @@ class Questions extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'userProfile' => array(self::BELONGS_TO, 'Profile', 'user_id'),
 		);
 	}
 
@@ -115,4 +117,15 @@ class Questions extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+    public function getNewQuestions()
+    {
+        $criteria = new CDbCriteria();
+
+        $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('yesterday')).'"');
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria
+        ));
+    }
 }
