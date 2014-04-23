@@ -7,10 +7,10 @@
 $this->pageTitle=Yii::app()->name;
 
 $this->menu=array(
-    array('label'=>CHtml::image(Yii::app()->createUrl('uploads/user-full/'.Yii::app()->user->avatar)), 'url'=>'#'),
+    //array('label'=>CHtml::image(Yii::app()->createUrl('uploads/user-full/'.Yii::app()->user->avatar)), 'url'=>'#'),
     array('label'=>'Profile', 'url'=>array('/user/profile')),
     array('label'=>'Propositions', 'url'=>array('#')),
-    array('label'=>'Create Proposition', 'url'=>array('#')),
+    array('label'=>'Create Proposition', 'url'=>array('new')),
 );
 ?>
 <div class="clearfix">

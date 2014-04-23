@@ -203,4 +203,22 @@ class User extends CActiveRecord
         }
         return parent::afterSave();
     }
+    
+    public function getUserCountByLevel($levelId) {
+        $table = $this->tableName();
+        $sql = <<<SQL
+                SELECT COUNT(*)
+                FROM {$table} u
+                  INNER JOIN users_locations s ON (s.user_id = u.id)
+                  INNER JOIN locations p ON (p.location_id = s.location_id)
+                WHERE p.level_id = :levelId AND p.user_id = :userId
+SQL;
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(':levelId', $levelId);
+        $command->bindValue(':userId', Yii::app()->user->id);
+        $users = $command->queryRow();
+
+        return $users;
+    }
+    
 }
