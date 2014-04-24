@@ -86,7 +86,8 @@ class Levels extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
-	}
+	}    
+    
 
 	/**
 	 * Returns the static model of the specified AR class.

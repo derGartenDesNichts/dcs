@@ -17,11 +17,25 @@
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
 	),
-)); ?>
+)); 
+
+$levels = Locations::model()->getUserLocations();
+$list = array();
+
+foreach ($levels as $level)
+    $list[$level['location_id']] = $level['description'];
+
+?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($data); ?>
+    
+    <div class="row">
+		<?php echo $form->labelEx($data,'level_id'); ?>
+		<?php echo $form->dropDownList($data,'level_id',$list); ?>
+		<?php echo $form->error($data,'level_id'); ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($data,'answer'); ?>

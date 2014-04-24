@@ -1,22 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "locations".
+ * This is the model class for table "users_answers".
  *
- * The followings are the available columns in table 'locations':
- * @property integer $location_id
- * @property string $level_id
- * @property string $description
- * @property string $date_added
+ * The followings are the available columns in table 'users_answers':
+ * @property integer $id
+ * @property integer $user_id
+ * @property integer $answer_id
+ * @property integer $question_id
+ * @property integer $answer
  */
-class Locations extends CActiveRecord
+class UsersAnswers extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'locations';
+		return 'users_answers';
 	}
 
 	/**
@@ -27,12 +28,11 @@ class Locations extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('level_id, description, date_added', 'required'),
-			array('level_id', 'length', 'max'=>10),
-			array('description', 'length', 'max'=>255),
+			array('user_id, answer_id, question_id', 'required'),
+			array('user_id, answer_id, question_id, answer', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('location_id, level_id, description, date_added', 'safe', 'on'=>'search'),
+			array('id, user_id, answer_id, question_id, answer', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,10 +53,11 @@ class Locations extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'location_id' => 'Location',
-			'level_id' => 'Level',
-			'description' => 'Description',
-			'date_added' => 'Date Added',
+			'id' => 'ID',
+			'user_id' => 'User',
+			'answer_id' => 'Answer',
+			'question_id' => 'Question',
+			'answer' => 'Answer',
 		);
 	}
 
@@ -78,10 +79,11 @@ class Locations extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('location_id',$this->location_id);
-		$criteria->compare('level_id',$this->level_id,true);
-		$criteria->compare('description',$this->description,true);
-		$criteria->compare('date_added',$this->date_added,true);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('answer_id',$this->answer_id);
+		$criteria->compare('question_id',$this->question_id);
+		$criteria->compare('answer',$this->answer);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -92,30 +94,10 @@ class Locations extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Locations the static model class
+	 * @return UsersAnswers the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
-	}
-    
-    public function getUserLocations($userId = null)
-	{
-        if(!$userId)
-            $userId = Yii::app ()->user->id;
-        
-		$table = $this->tableName();
-        
-        $sql = <<<SQL
-                SELECT l.location_id, l.description
-                FROM {$table} l
-                  INNER JOIN users_locations u ON (u.location_id = l.location_id)
-                WHERE u.user_id = :userId
-SQL;
-        $command = Yii::app()->db->createCommand($sql);
-        $command->bindValue(':userId', $userId);
-        $levels = $command->queryAll();
-        
-        return $levels;
 	}
 }

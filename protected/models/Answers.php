@@ -28,7 +28,7 @@ class Answers extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('question_id, iteration_number, answers_array, date_last_update', 'required'),
+			array('question_id, iteration_number', 'required'),
 			array('question_id, iteration_number', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

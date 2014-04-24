@@ -14,15 +14,36 @@ class QuestionsController extends Controller
         if(isset($_POST['Questions'])) {
             $question->attributes = $_POST['Questions'];
             
-            $question->level_id = 1;
+            //$question->level_id = 1;
             $question->user_id = Yii::app()->user->id;
-            $question->date_added = date("Y-m-d H:i:s");
-            $question->iteration_count = 1;
+            $question->date_added = date("Y-m-d H:i:s");            
             
-            $users = User::model()->getUserCountByLevel(1);
-            die(var_dump($users));
-            if($question->save())
+            $users = User::model()->getUserCountByLocation($_POST['Questions']['level_id']);
+            
+            if($users > 9)
+                $question->iteration_count = strlen($users)-1;
+            else
+                $question->iteration_count = 1;
+            
+            if($question->save()) {
+                
+                $answer = new Answers;
+                $answer->question_id = $question->question_id;
+                $answer->iteration_number = 1;
+                $answer->save();
+                
+                $users = User::model()->getRandomUsersByLocation($_POST['Questions']['level_id']);
+                
+                foreach ($users as $user) {
+                    $userAnswer = new UsersAnswers;
+                    $userAnswer->user_id = $user['id'];
+                    $userAnswer->answer_id = $answer->answer_id;
+                    $userAnswer->question_id = $question->question_id;
+                    $userAnswer->save();
+                }
+                
                 $success = true;
+            }
         }
         
         $this->render('create', array('data' => $question, 'success' => $success));
