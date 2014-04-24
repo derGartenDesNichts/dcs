@@ -32,14 +32,14 @@ class Questions extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, level_id, iteration_count, answer, text, date_added', 'required'),
+			array('user_id, level_id, iteration_count, answer, text, date_added, title', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('level_id, iteration_count', 'length', 'max'=>10),
 			array('answer, result', 'length', 'max'=>255),
 			array('expired_date', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('question_id, user_id, level_id, iteration_count, answer, text, date_added, expired_date, result', 'safe', 'on'=>'search'),
+			array('question_id, user_id, level_id, iteration_count, answer, text, date_added, expired_date, result, title', 'safe', 'on'=>'search'),
 		);
 	}
 

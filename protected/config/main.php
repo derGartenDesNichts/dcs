@@ -8,6 +8,7 @@
 
 Yii::setPathOfAlias('web', dirname(__FILE__).'/../..');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+Yii::setPathOfAlias('ext', dirname(__FILE__).'/../extensions');
 
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -21,6 +22,7 @@ $config = array(
 		'application.models.*',
 		'application.components.*',
         'application.components.helpers.*',
+        'application.extensions.*',
 		
 		'ext.EScriptBoost.*',
         'application.modules.user.models.*',
@@ -153,6 +155,9 @@ $config = array(
 				),
 			),
 		),
+        'shortcodes'=>array(
+            'class' => 'Shortcodes',
+        ),
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',
@@ -171,6 +176,8 @@ $config = array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'admin@example.com',
+        'sourceLanguage'=>'en',
+        'language'=>'ru',
 	),
 );
 

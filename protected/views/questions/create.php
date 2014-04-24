@@ -1,7 +1,6 @@
-
 <h1>Add New Proposition</h1>
 
-<?php if(@$success): ?>
+<?php if(@$success):?>
 
 <div class="flash-success">
 	<?php echo 'success'; ?>
@@ -31,26 +30,33 @@ foreach ($levels as $level)
 
 	<?php echo $form->errorSummary($data); ?>
     
-    <div class="row">
 		<?php echo $form->labelEx($data,'level_id'); ?>
 		<?php echo $form->dropDownList($data,'level_id',$list); ?>
 		<?php echo $form->error($data,'level_id'); ?>
-	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($data,'answer'); ?>
-		<?php echo $form->textArea($data,'answer',array('rows'=>2, 'cols'=>250)); ?>
-		<?php echo $form->error($data,'answer'); ?>
-	</div>
+		<?php echo $form->labelEx($data,'title'); ?>
+		<?php echo $form->textArea($data,'title',array('rows'=>1, 'cols'=>250)); ?>
+		<?php echo $form->error($data,'title'); ?>
 
-	<div class="row">
 		<?php echo $form->labelEx($data,'text'); ?>
-		<?php echo $form->textArea($data,'text',array('rows'=>6, 'cols'=>250)); ?>
+		<?php
+        $this->widget('ext.redactorWidget.ImperaviRedactorWidget',array(
+            'model'=>$data,
+            'attribute'=>'text',
+            'name'=>'redactor',
+            'options'=>array(
+                'minHeight'=>200,
+                'convertVideoLinks'=> true,
+                'convertImageLinks'=> true,
+                'fileUpload'=>Yii::app()->createUrl('questions/upload'),
+                'convertLinks'=>true
+            ),
+        )); ?>
+
 		<?php echo $form->error($data,'text'); ?>
-	</div>
 
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton('Submit'); ?>
 	</div>
 

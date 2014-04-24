@@ -5,12 +5,13 @@
 @var $newQuestions Questions */
 
 $this->pageTitle=Yii::app()->name;
+$avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avatar))) ? Yii::app()->createUrl('uploads/user-full/'.Yii::app()->user->avatar) : Yii::app()->createUrl('images/logo.jpg');
 
 $this->menu=array(
-    //array('label'=>CHtml::image(Yii::app()->createUrl('uploads/user-full/'.Yii::app()->user->avatar)), 'url'=>'#'),
+    array('label'=>CHtml::image($avatarUrl), 'url'=>'#'),
     array('label'=>'Profile', 'url'=>array('/user/profile')),
-    array('label'=>'Propositions', 'url'=>array('#')),
-    array('label'=>'Create Proposition', 'url'=>array('new')),
+    array('label'=>'Propositions', 'url'=>array('/questions/list')),
+    array('label'=>'Create Proposition', 'url'=>array('/questions/new')),
 );
 ?>
 <div class="clearfix">
