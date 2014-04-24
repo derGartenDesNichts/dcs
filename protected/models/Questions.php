@@ -53,6 +53,7 @@ class Questions extends CActiveRecord
 		return array(
             'user' => array(self::BELONGS_TO, 'User', 'user_id'),
             'userProfile' => array(self::BELONGS_TO, 'Profile', 'user_id'),
+            'userAnswer' => array(self::HAS_ONE, 'UsersAnswers', array('question_id' => 'question_id')),
 		);
 	}
 
@@ -121,9 +122,12 @@ class Questions extends CActiveRecord
     public function getNewQuestions()
     {
         $criteria = new CDbCriteria();
-
+        
+        $criteria->with = 'userAnswer';
+        $criteria->together = true;
+        $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
         $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('yesterday')).'"');
-
+        
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria
         ));

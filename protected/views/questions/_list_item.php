@@ -30,7 +30,7 @@
 
         ?>
     </div>
-    <div align="right"><a class="btn btn-info" href="<?=Yii::app()->createUrl('#')?>">Read More</a></div>
+    <div align="right"><a class="btn btn-info" href="<?=Yii::app()->createUrl('questions/view', array('id' => $data->question_id))?>">Read More</a></div>
 </div>
 </div>
 </div>
