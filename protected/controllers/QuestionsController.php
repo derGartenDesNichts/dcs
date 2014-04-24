@@ -52,7 +52,14 @@ class QuestionsController extends Controller
     public function actionList()
     {
         $question = new Questions;
-
+        
         $this->render('list', array('data' => $question->getNewQuestions()));
+    }
+    
+    public function actionView($id)
+    {
+        $question = Questions::model()->findByPk($id);
+        
+        $this->render('view', array('data' => $question));
     }
 }
