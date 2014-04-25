@@ -52,8 +52,8 @@ class UsersLocations extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
-			'location_id' => 'Location',
+			'user_id' => tt('User'),
+			'location_id' => tt('Location'),
 		);
 	}
 

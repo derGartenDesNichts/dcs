@@ -14,7 +14,7 @@ $config = array(
 	'name'=>'DCS',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log','shortcodes'),
 
 	// autoloading model and component classes
 	'import'=>array(

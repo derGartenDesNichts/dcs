@@ -54,11 +54,11 @@ class Delegates extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'user_id' => 'User',
-			'delegate_id' => 'Delegate',
-			'level_id' => 'Level',
-			'date_added' => 'Date Added',
+			'id' => tt('ID'),
+			'user_id' => tt('User'),
+			'delegate_id' => tt('Delegate'),
+			'level_id' => tt('Level'),
+			'date_added' => tt('Date Added'),
 		);
 	}
 

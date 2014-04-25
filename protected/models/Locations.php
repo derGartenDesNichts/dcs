@@ -53,10 +53,10 @@ class Locations extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'location_id' => 'Location',
-			'level_id' => 'Level',
-			'description' => 'Description',
-			'date_added' => 'Date Added',
+			'location_id' => tt('Location'),
+			'level_id' => tt('Level'),
+			'description' => tt('Description'),
+			'date_added' => tt('Date Added'),
 		);
 	}
 

@@ -54,11 +54,11 @@ class Comments extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'comment_id' => 'Comment',
-			'question_id' => 'Question',
-			'user_id' => 'User',
-			'text' => 'Text',
-			'date_added' => 'Date Added',
+			'comment_id' => tt('Comment'),
+			'question_id' => tt('Question'),
+			'user_id' => tt('User'),
+			'text' => tt('Text'),
+			'date_added' => tt('Date Added'),
 		);
 	}
 

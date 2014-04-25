@@ -63,15 +63,16 @@ class Questions extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'question_id' => 'Question',
-			'user_id' => 'User',
-			'level_id' => 'Level',
-			'iteration_count' => 'Iteration Count',
-			'answer' => 'Answer',
-			'text' => 'Text',
-			'date_added' => 'Date Added',
-			'expired_date' => 'Expired Date',
-			'result' => 'Result',
+			'question_id' => tt('Question'),
+			'user_id' => tt('User'),
+			'level_id' => tt('Level'),
+			'iteration_count' => tt('Iteration Count'),
+			'answer' => tt('Answer'),
+			'text' => tt('Text'),
+			'date_added' => tt('Date Added'),
+			'expired_date' => tt('Expired Date'),
+			'result' => tt('Result'),
+            'title' =>tt('Title')
 		);
 	}
 

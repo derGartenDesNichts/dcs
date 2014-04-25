@@ -14,9 +14,9 @@ $avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avata
 <?php
 $this->menu=array(
     array('label'=>CHtml::image($avatarUrl), 'url'=>'#'),
-    array('label'=>Yii::t('trans','Profile'), 'url'=>array('/user/profile')),
-    array('label'=>Yii::t('trans','Propositions'), 'url'=>array('/questions/list')),
-    array('label'=>Yii::t('trans', 'Create Proposition'), 'url'=>array('/questions/new')),
+    array('label'=>tt('Profile'), 'url'=>array('/user/profile')),
+    array('label'=>tt('Propositions'), 'url'=>array('/questions/list')),
+    array('label'=>tt('Create Proposition'), 'url'=>array('/questions/new')),
 );
 ?>
 

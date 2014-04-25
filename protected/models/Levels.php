@@ -53,10 +53,10 @@ class Levels extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'level_id' => 'Level',
-			'parent_id' => 'Parent',
-			'description' => 'Description',
-			'date_added' => 'Date Added',
+			'level_id' => tt('Level'),
+			'parent_id' => tt('Parent'),
+			'description' => tt('Description'),
+			'date_added' => tt('Date Added'),
 		);
 	}
 

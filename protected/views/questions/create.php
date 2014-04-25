@@ -1,4 +1,4 @@
-<h1>Add New Proposition</h1>
+<h3><?php echo tt('Add New Proposition') ?></h3>
 
 <?php if(@$success):?>
 
@@ -26,7 +26,7 @@ foreach ($levels as $level)
 
 ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note"><?php echo tt('Fields with') ?> <span class="required">*</span> <?php echo tt('are required')?>.</p>
 
 	<?php echo $form->errorSummary($data); ?>
     
