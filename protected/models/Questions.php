@@ -122,12 +122,14 @@ class Questions extends CActiveRecord
     public function getNewQuestions()
     {
         $criteria = new CDbCriteria();
-        
-        $criteria->with = 'userAnswer';
-        $criteria->together = true;
-        $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
-        $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('yesterday')).'"');
-        
+
+      //  $criteria->with = 'userAnswer';
+     //   $criteria->together = true;
+       // $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
+        //$criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('yesterday')).'"');
+        $criteria->limit = 20;
+        $criteria->order = 't.date_added DESC';
+
         return new CActiveDataProvider($this, array(
             'criteria'=>$criteria
         ));

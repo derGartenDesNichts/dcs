@@ -1,10 +1,10 @@
 <?php
-/* @var $newQuestions Questions */
+/* @var $question Questions */
 
 $this->widget('bootstrap.widgets.TbListView', array(
     'id'=>'new-questions-qrid',
     'template'=>"{items}{pager}",
-    'dataProvider'=> Questions::model()->getNewQuestions(),
+    'dataProvider'=> $question->getNewQuestions(),
     'itemView'=>'/questions/_list_item',
     'summaryText'=>false,
     'ajaxUpdate' => false,

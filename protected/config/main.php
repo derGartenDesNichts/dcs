@@ -8,7 +8,6 @@
 
 Yii::setPathOfAlias('web', dirname(__FILE__).'/../..');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
-Yii::setPathOfAlias('ext', dirname(__FILE__).'/../extensions');
 
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -21,7 +20,7 @@ $config = array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-        'application.components.helpers.*',
+        'application.helpers.*',
         'application.extensions.*',
 		
 		'ext.EScriptBoost.*',
@@ -77,13 +76,14 @@ $config = array(
             'loginUrl' => array('/user/login'),
 		),
 		'urlManager'=>array(
+            'class'=>'DLanguageUrlManager',
 			'showScriptName' => false,
 			'urlFormat' => 'path',
 			'rules'=>array(
-				'' => 'site/index',
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                '' => 'site/index',
+                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
 		'db'=>array(
@@ -154,7 +154,11 @@ $config = array(
 					// 'publishCss' => !YII_DEBUG,
 				),
 			),
+
 		),
+        'request'=>array(
+            'class'=>'DLanguageHttpRequest',
+        ),
         'shortcodes'=>array(
             'class' => 'Shortcodes',
         ),
@@ -173,11 +177,19 @@ $config = array(
 		),
 	),
 
+    'sourceLanguage'=>'en',
+    'language'=>'ru',
+
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'admin@example.com',
-        'sourceLanguage'=>'en',
-        'language'=>'ru',
+        'translatedLanguages'=>array(
+            'ru'=>'Russian',
+            'en'=>'English',
+            'ua'=>'Ukraine',
+        ),
+        'defaultLanguage'=>'ru',
+
 	),
 );
 

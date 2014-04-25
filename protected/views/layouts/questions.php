@@ -1,19 +1,6 @@
 <?php /* @var $this Controller */ ?>
 <?php $this->beginContent('//layouts/column2'); ?>
-<?php
-/* @var $this SiteController
-@var $newQuestions Questions */
 
-$this->pageTitle=Yii::app()->name;
-$avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avatar))) ? Yii::app()->createUrl('uploads/user-full/'.Yii::app()->user->avatar) : Yii::app()->createUrl('images/logo.jpg');
-
-$this->menu=array(
-    array('label'=>CHtml::image($avatarUrl), 'url'=>'#'),
-    array('label'=>'Profile', 'url'=>array('/user/profile')),
-    array('label'=>'Propositions', 'url'=>array('/questions/list')),
-    array('label'=>'Create Proposition', 'url'=>array('/questions/new')),
-);
-?>
 <div class="clearfix">
     <?php
     $this->widget('bootstrap.widgets.TbTabs',array(
@@ -21,10 +8,10 @@ $this->menu=array(
             'type'=>'tabs',
             'placement'=>'top',
             'tabs'=>array(
-                array('label'=>'New','url'=>array('#'),'active'=>true),
-                array('label'=>'My','url'=>array('#')),
-                array('label'=>'Voted','url'=>array('#')),
-                array('label'=>'In Performing','url'=>array('#')),
+                array('label'=>Yii::t('trans', 'New'),'url'=>array('#'),'active'=>true),
+                array('label'=>Yii::t('trans', 'My'),'url'=>array('#')),
+                array('label'=>Yii::t('trans', 'Voted'),'url'=>array('#')),
+                array('label'=>Yii::t('trans', 'In Performing'),'url'=>array('#')),
             ))
     );
     echo $content;

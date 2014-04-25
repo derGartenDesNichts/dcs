@@ -53,7 +53,7 @@ class QuestionsController extends Controller
     {
         $question = new Questions;
         
-        $this->render('list', array('data' => $question->getNewQuestions()));
+        $this->render('list', array('question' => $question));
     }
     
     public function actionView($id)
