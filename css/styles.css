@@ -86,10 +86,10 @@ textarea{
 }
 
 #wrapper .navbar-inner{
-	background: #1dadcc;
+	background: #cacbcc;
 //	-webkit-box-shadow:0 0 4px rgb(0, 0, 0), 0 0 4px rgba(65, 177, 204, 0.40) inset;
 //	box-shadow:0 0 4px rgba(65, 177, 204, 0.40), 0 0 4px rgba(65, 177, 204, 0.40) inset;
-	border:solid #1dadcc;
+	border:solid #cacbcc;
 	border-width:1px 0;
 	filter: none !important;
 }
@@ -123,12 +123,12 @@ textarea{
 	filter: alpha(opacity=70);
 }
 #wrapper .navbar .nav>li.active>a{
-	background: #2ca3cc;
+	background: #cacbcc;
 	opacity:1;
 	filter: alpha(opacity=100);
 }
 #wrapper .navbar .nav>li.open>a{
-	background: #0088cc;
+	background: #cacbcc;
 }
 .navbar .nav li.dropdown > .dropdown-toggle .caret{
 	border-bottom-color: #fff !important;
@@ -189,7 +189,7 @@ textarea{
 }
 .action-links li{
 	float:left;
-	border-left:1px solid #08c;
+	border-left:1px solid #cacbcc;
 	padding:0 8px;
 }
 .action-links li:first-child{
@@ -347,6 +347,12 @@ textarea{
 .well.well-blue{
 	background:#E6F0F5;
 	border-color:#D2E5EF;
+}
+.message-list .well:first-child{margin-top:0;}
+.message-list .well.odd,
+.well.well-white{
+    background:#FFFFFF;
+    border-color:#D2E5EF;
 }
 .message-list .well.odd .topic-heading{
 	border-color:#D2E5EF;
@@ -572,9 +578,9 @@ textarea{
 /* footer */
 
 #footer{
-	background: #1dadcc;
-	-webkit-box-shadow:0 -1px 0 1px #1dadcc;
-    box-shadow:0 -1px 0 1px #1dadcc;
+	background: #cacbcc;
+	-webkit-box-shadow:0 -1px 0 1px #cacbcc;
+    box-shadow:0 -1px 0 1px #cacbcc;
 	text-align:center;
 	display:table-footer-group;
 	color:#fff;
@@ -617,7 +623,7 @@ textarea{
 	margin: 0 5px;
 }
 .table-events .table th{
-	background: #08c;
+	background: #cacbcc;
 	color: #fff;
 	text-align: center;
 }
@@ -648,7 +654,7 @@ textarea{
 	padding: 4px 5px;
 	display: table-cell;
 	vertical-align: middle;
-	background: #15a4ec;
+	background: #ece5e7;
 }
 .table-events #economic-events-grid_c0{
 	width: 52px;

@@ -26,22 +26,58 @@
                 array(
                     'class'=>'bootstrap.widgets.TbMenu',
                     'htmlOptions'=>array('class'=>'clearfix'),
+                    'encodeLabel' => false,
                     'items'=>array(
-                        array('label'=>tt('Home'), 'icon'=>'home', 'url'=>array('/site/index'), 'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>tt('Admin'), 'icon'=>'cog', 'url'=>array('/admin/default/index'), 'visible'=>Yii::app()->user->isAdmin()),
-                        array('label'=>tt('Profile'),'icon'=>'user', 'url'=>array('/user/profile'), 'visible'=>!Yii::app()->user->isGuest),
-                        array('label'=>tt('Login'), 'icon'=>'ok', 'url'=>Yii::app()->getModule('user')->loginUrl, 'visible'=>Yii::app()->user->isGuest),
-                        array('label'=>tt('Registration'), 'icon'=>'pencil', 'url'=>Yii::app()->getModule('user')->registrationUrl, 'visible'=>Yii::app()->user->isGuest),
-                        array('label'=>tt('Logout').' ('.Yii::app()->user->name.')', 'icon'=>'off', 'url'=>Yii::app()->getModule('user')->logoutUrl, 'visible'=>!Yii::app()->user->isGuest),
+                        array(
+                            'label'=>tt('Home'),
+                            'icon'=>'home',
+                            'url'=>array('/site/index'),
+                            'visible'=>!Yii::app()->user->isGuest
+                        ),
+                        array(
+                            'label'=>tt('Admin'),
+                            'icon'=>'cog',
+                            'url'=>array('/admin/default/index'),
+                            'visible'=>Yii::app()->user->isAdmin()
+                        ),
+                        array(
+                            'label'=>tt('Profile'),
+                            'icon'=>'user',
+                            'url'=>array('/user/profile'),
+                            'visible'=>!Yii::app()->user->isGuest
+                        ),
+                        array(
+                            'label'=>tt('Login'),
+                            'icon'=>'ok',
+                            'url'=>Yii::app()->getModule('user')->loginUrl,
+                            'visible'=>Yii::app()->user->isGuest
+                        ),
+                        array(
+                            'label'=>tt('Registration'),
+                            'icon'=>'pencil',
+                            'url'=>Yii::app()->getModule('user')->registrationUrl,
+                            'visible'=>Yii::app()->user->isGuest
+                        ),
+                        array(
+                            'label'=>tt('Logout').' ('.Yii::app()->user->name.')',
+                            'icon'=>'off',
+                            'url'=>Yii::app()->getModule('user')->logoutUrl,
+                            'visible'=>!Yii::app()->user->isGuest
+                        ),
+
                     ),
+
                 ),
+                LanguageSwitcher::get()
             ),
-        )); ?>
+        ));
+       ?>
 
         <div class="container" id="page">
 
             <?php
             // Breadcrumbs
+
             if (isset($this->breadcrumbs)) {
                 $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
                     'links' => $this->breadcrumbs,

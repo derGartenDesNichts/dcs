@@ -1,6 +1,6 @@
 <?php
 
-class LevelsController extends Controller
+class MessagesController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -26,16 +26,8 @@ class LevelsController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('index','view','admin','delete','create','update'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -61,18 +53,19 @@ class LevelsController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Levels;
+		$model=new Messages;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Levels']))
+		if(isset($_POST['Messages']))
 		{
-			$model->attributes=$_POST['Levels'];
-            $model->date_added=new CDbExpression('NOW()');
+			$model->attributes=$_POST['Messages'];
+            $model->created = new CDbExpression('NOW()');
+            $model->is_read = 0;
 
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->level_id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -92,11 +85,11 @@ class LevelsController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Levels']))
+		if(isset($_POST['Messages']))
 		{
-			$model->attributes=$_POST['Levels'];
+			$model->attributes=$_POST['Messages'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->level_id));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -129,7 +122,7 @@ class LevelsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Levels');
+		$dataProvider=new CActiveDataProvider('Messages');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -140,10 +133,10 @@ class LevelsController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Levels('search');
+		$model=new Messages('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Levels']))
-			$model->attributes=$_GET['Levels'];
+		if(isset($_GET['Messages']))
+			$model->attributes=$_GET['Messages'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -157,7 +150,7 @@ class LevelsController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Levels::model()->findByPk($id);
+		$model=Messages::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -169,7 +162,7 @@ class LevelsController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='levels-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='messages-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -13,3 +13,4 @@ $this->breadcrumbs=array(
 <p><a href="<?php echo Yii::app()->createUrl('/admin/linking/admin')?>">Manage Linking</a></p>
 <p><a href="<?php echo Yii::app()->createUrl('/admin/locations/admin')?>">Manage Locations</a></p>
 <p><a href="<?php echo Yii::app()->createUrl('/admin/questions/admin')?>">Manage Questions</a></p>
+<p><a href="<?php echo Yii::app()->createUrl('/admin/messages/admin')?>">Manage Messages</a></p>

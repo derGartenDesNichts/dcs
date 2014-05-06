@@ -3,7 +3,7 @@
 class ProfileController extends Controller
 {
 	public $defaultAction = 'profile';
-	public $layout='//layouts/column2';
+	public $layout='//layouts/column2f';
 
 	/**
 	 * @var CActiveRecord the currently loaded data model instance.
@@ -40,8 +40,19 @@ class ProfileController extends Controller
 		
 		if(isset($_POST['User']))
 		{
+            //die(var_dump($_POST));
 			$model->attributes=$_POST['User'];
 			$profile->attributes=$_POST['Profile'];
+
+            if(isset($_POST['UserLocation']) && !empty($_POST['UserLocation']))
+            {
+                foreach($_POST['UserLocation'] as $location)
+                {
+                    $model = new UsersLocations;
+                    //$location['country']
+                }
+
+            }
 			
 			if($model->validate()&&$profile->validate()) {
 				$model->save();

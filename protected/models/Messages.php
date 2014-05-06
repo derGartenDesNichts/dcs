@@ -1,21 +1,34 @@
 <?php
 
 /**
- * This is the model class for table "users_locations".
+ * This is the model class for table "messages".
  *
- * The followings are the available columns in table 'users_locations':
+ * The followings are the available columns in table 'messages':
  * @property integer $id
- * @property integer $user_id
- * @property integer $location_id
+ * @property integer $user_from
+ * @property integer $user_to
+ * @property string $text
+ * @property string $created
+ * @property integer $is_read
  */
-class UsersLocations extends CActiveRecord
+class Messages extends CActiveRecord
 {
+    public function beforeSave()
+    {
+        if ($this->isNewRecord)
+            $this->created = new CDbExpression('NOW()');
+
+        return parent::beforeSave();
+    }
+
+
+
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'users_locations';
+		return 'messages';
 	}
 
 	/**
@@ -26,11 +39,12 @@ class UsersLocations extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, location_id', 'required'),
-			array('user_id, location_id', 'numerical', 'integerOnly'=>true),
+			array('user_from, user_to', 'required'),
+			array('user_from, user_to, is_read', 'numerical', 'integerOnly'=>true),
+			array('text, created', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, user_id, location_id', 'safe', 'on'=>'search'),
+			array('id, user_from, user_to, text, created, is_read', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -42,7 +56,8 @@ class UsersLocations extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-            'locations'=> array(self::BELONGS_TO, 'Locations', 'location_id'),
+            'userFrom' => array(self::BELONGS_TO, 'Users', 'user_from'),
+            'userTo'   => array(self::BELONGS_TO, 'Users', 'user_to'),
 		);
 	}
 
@@ -53,8 +68,11 @@ class UsersLocations extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => tt('User'),
-			'location_id' => tt('Location'),
+			'user_from' => 'User From',
+			'user_to' => 'User To',
+			'text' => 'Text',
+			'created' => 'Created',
+			'is_read' => 'Is Read',
 		);
 	}
 
@@ -77,8 +95,11 @@ class UsersLocations extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('user_id',$this->user_id);
-		$criteria->compare('location_id',$this->location_id);
+		$criteria->compare('user_from',$this->user_from);
+		$criteria->compare('user_to',$this->user_to);
+		$criteria->compare('text',$this->text,true);
+		$criteria->compare('created',$this->created,true);
+		$criteria->compare('is_read',$this->is_read);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -89,10 +110,19 @@ class UsersLocations extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return UsersLocations the static model class
+	 * @return Messages the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
+
+    public function getLastMessage($user_from,$user_to)
+    {
+        $criteria = array(
+            'order' => 'created DESC',
+            'condition'=>'user_from IN('.$user_from.','.$user_to.') AND user_from IN('.$user_from.','.$user_to.')'
+        );
+        return Messages::model()->find($criteria);
+    }
 }

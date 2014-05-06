@@ -10,6 +10,7 @@ return array(
     'Login' => 'Вход',
     'Registration' => 'Регистрация',
     'Logout' => 'Выход',
+    'My Messages'=>'Сообщения',
 
     //question layout
     'Propositions' => 'Предложения',
@@ -61,10 +62,22 @@ return array(
 
     // Locations model
     'Location'=>'Место расположения',
+    'Country'=>'Страна',
+    'District'=>'Область',
+    'City'=>'Город',
+    'Street'=>'Улица',
+    'House number'=>'Номер дома',
+    'Apartment number'=>'Номер квартиры',
 
     // Questions model
     'Iteration Count'=>'Количество итераций',
     'Expired Date'=>'Дата окончания голосования',
     'Result'=>'Результат',
-    'Title'=>'Заголовок'
+    'Title'=>'Заголовок',
+
+    // Messages
+    'You have no messages'=>'У Вас нет сообщений',
+    'Last message'=>'Последнее сообщение',
+
+
 );

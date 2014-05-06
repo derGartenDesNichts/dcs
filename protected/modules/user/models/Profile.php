@@ -201,7 +201,7 @@ class Profile extends UActiveRecord
         if (get_class(Yii::app())=='CWebApplication'&&Profile::$regMode==false) {
             Yii::app()->user->updateSession();
         }
-// die(var_dump($this->avatar));
+
         if ($this->avatar instanceof EUploadedImage) {
             $image = $this->avatar;
             /* @var $image EUploadedImage */
@@ -222,9 +222,9 @@ class Profile extends UActiveRecord
      */
     public function getImageUrl($fullSize = false)
     {
-        return isset($this->avatar)
+        return (isset($this->avatar) && !empty($this->avatar))
             ? '../' . $this->getImageRelativePath($fullSize)
-            : '';
+            : '../images/logo.jpg';
     }
 
     /**
@@ -242,7 +242,7 @@ class Profile extends UActiveRecord
     {
         $dir = $fullSize ? 'user-full' : 'user-thumb';
 
-        return 'uploads/' . $dir . '/' . $this->avatar;
+        return '/uploads/' . $dir . '/' . $this->avatar;
     }
 
     /**
