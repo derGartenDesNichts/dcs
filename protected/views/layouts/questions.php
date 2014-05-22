@@ -8,10 +8,10 @@
             'type'=>'tabs',
             'placement'=>'top',
             'tabs'=>array(
-                array('label'=>Yii::t('trans', 'New'),'url'=>array('#'),'active'=>true),
-                array('label'=>Yii::t('trans', 'My'),'url'=>array('#')),
-                array('label'=>Yii::t('trans', 'Voted'),'url'=>array('#')),
-                array('label'=>Yii::t('trans', 'In Performing'),'url'=>array('#')),
+                array('label'=>tt('New'),'url'=>array('#'),'active'=>true),
+                array('label'=>tt('My'),'url'=>array('#')),
+                array('label'=>tt('Voted'),'url'=>array('#')),
+                array('label'=>tt('In Performing'),'url'=>array('#')),
             ))
     );
     echo $content;

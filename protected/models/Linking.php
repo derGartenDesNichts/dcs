@@ -54,9 +54,9 @@ class Linking extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
-			'level_id' => 'Level',
-			'location_id' => 'Location',
+			'user_id' => tt('User'),
+			'level_id' => tt('Level'),
+			'location_id' => tt('Location'),
 		);
 	}
 

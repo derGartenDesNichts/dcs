@@ -77,9 +77,13 @@ class User extends CActiveRecord
 	 */
 	public function relations()
 	{
-        $relations = Yii::app()->getModule('user')->relations;
+        $relations = Yii::app()->getModule('user')->relations+array(
+                'users_locations' => array(self::HAS_MANY, 'UsersLocations', 'user_id'),
+            );
+
         if (!isset($relations['profile']))
             $relations['profile'] = array(self::HAS_ONE, 'Profile', 'user_id');
+
         return $relations;
 	}
 
@@ -240,6 +244,31 @@ SQL;
         $users = $command->queryAll();
         //die(var_dump($users));
         return $users;
+    }
+
+    /**
+     * Returns amount of unread messages for current authenticated user
+     * if $fromUserId > 0 get messages only from certain user
+     *
+     * @param int $fromUserId user id
+     * @return string
+     */
+    public function getAmountOfUnreadMessages($fromUserId = 0)
+    {
+        $arr = array(
+            'user_to' => Yii::app()->user->id,
+            'is_read' => 0,
+        );
+
+        if ($fromUserId > 0)
+            $arr['user_from'] = $fromUserId;
+
+        $count = Messages::model()->countByAttributes($arr);
+
+        if ($count == 0)
+            return '';
+
+        return $count;
     }
     
 }

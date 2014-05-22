@@ -26,7 +26,7 @@ $this->menu = $menu;
 <?php endif; ?>
 <div class="clearfix">
     <div class="user-avatar">
-        <?php echo CHtml::image($profile->getImageUrl(true), '')?>
+        <?php echo CHtml::image(Yii::app()->createUrl($profile->getImageUrl(true)), '')?>
     </div>
     <div class="form-view">
         <div class="form-view-row">
@@ -37,9 +37,6 @@ $this->menu = $menu;
         $profileFields=ProfileField::model()->forOwner()->sort()->findAll();
         if ($profileFields) {
             foreach($profileFields as $field) {
-                if ($field->varname === 'website')
-                    continue;
-                //echo "<pre>"; print_r($profile); die();
 
                 $value = $profile->getAttribute($field->varname);
                 if (empty($value))
@@ -54,7 +51,7 @@ $this->menu = $menu;
         }
         ?>
         <?php if (!empty($profile->website)) :
-            //die('<pre>'.var_export(strpos($profile->website,'http://')).'</pre>');
+
             if(strpos($profile->website,'http://') !== 0)
                 $profile->website = 'http://' . $profile->website;
             ?>
@@ -77,31 +74,14 @@ $this->menu = $menu;
             <span class="control-label"><?php echo CHtml::encode($model->getAttributeLabel('lastvisit_at')); ?></span>
             <span class="controls"><?php echo $model->lastvisit_at; ?></span>
         </div>
-        <div class="form-view-row">
-            <span class="control-label"><?php echo CHtml::encode($model->getAttributeLabel('status')); ?></span>
-            <span class="controls"><?php echo CHtml::encode(User::itemAlias("UserStatus",$model->status)); ?></span>
-        </div>
-        <div class="form-view-row">
-            <span class="control-label">Posts</span>
-            <span class="controls"><?php //echo Comment::model()->countByAttributes(array('user_id'=>$model->id));?></span>
-        </div>
-        <div class="form-view-row">
-            <span class="control-label">Topics Started</span>
-            <span class="controls"><?php //echo Comment::model()->countByAttributes(array('user_id'=>$model->id,'is_first'=>1)); ?></span>
-        </div>
-        <?php if (!empty($profile->signature)) : ?>
+
+        <?php if (!empty($model->users_locations)) : ?>
             <div class="form-view-row">
-                <span class="control-label">Signature</span>
-                <span class="controls well well-small"><?=$profile->signature?></span>
-            </div>
-        <?php endif; ?>
-        <?php if (!empty($model->badges)) : ?>
-            <div class="form-view-row">
-                <span class="control-label">Badges</span>
-                <span class="controls well well-small">
+                <span class="control-label">Locations</span>
+                <span class="controls">
                     <?php
-                    foreach ($model->badges as $badge) {
-                        echo $badge->title . '<br>';
+                    foreach ($model->users_locations as $location) {
+                        echo $location->locations->description . '<br>';
                     }
                     ?>
                 </span>

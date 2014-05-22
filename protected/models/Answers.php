@@ -53,11 +53,11 @@ class Answers extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'answer_id' => 'Answer',
-			'question_id' => 'Question',
-			'iteration_number' => 'Iteration Number',
-			'answers_array' => 'Answers Array',
-			'date_last_update' => 'Date Last Update',
+			'answer_id' => tt('Answer'),
+			'question_id' => tt('Question'),
+			'iteration_number' => tt('Iteration Number'),
+			'answers_array' => tt('Answers Array'),
+			'date_last_update' => tt('Date Last Update'),
 		);
 	}
 

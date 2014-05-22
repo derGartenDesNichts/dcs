@@ -14,7 +14,7 @@ $config = array(
 	'name'=>'DCS',
 
 	// preloading 'log' component
-	'preload'=>array('log'),
+	'preload'=>array('log','shortcodes'),
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -184,9 +184,9 @@ $config = array(
 		// this is used in contact page
 		'adminEmail'=>'admin@example.com',
         'translatedLanguages'=>array(
-            'ru'=>'Russian',
-            'en'=>'English',
-            'ua'=>'Ukraine',
+            'ru'=>'Ru',
+            'en'=>'En',
+            'ua'=>'Ua',
         ),
         'defaultLanguage'=>'ru',
 

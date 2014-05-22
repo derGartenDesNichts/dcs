@@ -6,17 +6,23 @@
 @var $newQuestions Questions */
 
 $this->pageTitle=Yii::app()->name;
-$avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avatar))) ? Yii::app()->createUrl('uploads/user-full/'.Yii::app()->user->avatar) : Yii::app()->createUrl('images/logo.jpg');
+
+$avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avatar))) ?
+    Yii::app()->createUrl('../uploads/user-full/'.Yii::app()->user->avatar) :
+    Yii::app()->createUrl('../images/logo.jpg');
 ?>
 
-<?php $this->widget('LanguageSwitcherWidget'); ?>
+
 
 <?php
 $this->menu=array(
     array('label'=>CHtml::image($avatarUrl), 'url'=>'#'),
-    array('label'=>Yii::t('trans','Profile'), 'url'=>array('/user/profile')),
-    array('label'=>Yii::t('trans','Propositions'), 'url'=>array('/questions/list')),
-    array('label'=>Yii::t('trans', 'Create Proposition'), 'url'=>array('/questions/new')),
+    array('label'=>tt('Profile'), 'url'=>array('/user/profile')),
+    array(
+        'label'=>(Yii::app()->user->model()->amountOfUnreadMessages)? tt('My Messages').' <b>('.Yii::app()->user->model()->amountOfUnreadMessages.')</b>': tt('My Messages'),
+        'url'=>array('/messages/LastUsersList')),
+    array('label'=>tt('Propositions'), 'url'=>array('/questions/list')),
+    array('label'=>tt('Create Proposition'), 'url'=>array('/questions/new')),
 );
 ?>
 

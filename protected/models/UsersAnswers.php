@@ -54,10 +54,10 @@ class UsersAnswers extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
-			'answer_id' => 'Answer',
-			'question_id' => 'Question',
-			'answer' => 'Answer',
+			'user_id' => tt('User'),
+			'answer_id' => tt('Answer'),
+			'question_id' => tt('Question'),
+			'answer' => tt('Answer'),
 		);
 	}
 

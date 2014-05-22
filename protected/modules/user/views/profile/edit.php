@@ -46,8 +46,7 @@ $this->menu=array(
 		} else {
 			echo $form->textField($profile,$field->varname,array('size'=>60,'maxlength'=>(($field->field_size)?$field->field_size:255)));
 		}
-		echo $form->error($profile,$field->varname); ?>
-			<?php
+		echo $form->error($profile,$field->varname);
 			}
 		}
 ?>
@@ -62,6 +61,42 @@ $this->menu=array(
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'email'); ?>
+
+        <?php echo $form->labelEx($model,'email'); ?>
+        <?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>128)); ?>
+        <?php echo $form->error($model,'email'); ?>
+
+        <h5><?php echo tt('Location')?></h5>
+
+        <label>
+            <?php echo tt('Country') ?>
+        </label>
+        <?php echo LocationHelper::getCountryDropdown()?>
+
+        <label>
+            <?php echo tt('District') ?>
+        </label>
+        <input type="text" name="UserLocation[district]">
+
+        <label>
+            <?php echo tt('City') ?>
+        </label>
+        <input type="text" name="UserLocation[city]">
+
+        <label>
+            <?php echo tt('Street') ?>
+        </label>
+        <input type="text" name="UserLocation[street]">
+
+        <label>
+            <?php echo tt('House number') ?>
+        </label>
+        <input type="text" name="UserLocation[house]">
+
+        <label>
+            <?php echo tt('Apartment number') ?>
+        </label>
+        <input type="text" name="UserLocation[apartment]">
 
     <div class="controls">
         <?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save'), array('class'=>'btn btn-success')); ?>

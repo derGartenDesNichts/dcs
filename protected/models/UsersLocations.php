@@ -42,6 +42,7 @@ class UsersLocations extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'locations'=> array(self::BELONGS_TO, 'Locations', 'location_id'),
 		);
 	}
 
@@ -52,8 +53,8 @@ class UsersLocations extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
-			'location_id' => 'Location',
+			'user_id' => tt('User'),
+			'location_id' => tt('Location'),
 		);
 	}
 
