@@ -32,7 +32,7 @@ class Questions extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_id, level_id, iteration_count, answer, text, date_added, title', 'required'),
+			array('user_id, level_id, iteration_count, text, date_added, title', 'required'),
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('level_id, iteration_count', 'length', 'max'=>10),
 			array('answer, result', 'length', 'max'=>255),
@@ -123,10 +123,10 @@ class Questions extends CActiveRecord
     {
         $criteria = new CDbCriteria();
 
-      //  $criteria->with = 'userAnswer';
-     //   $criteria->together = true;
-       // $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
-        //$criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('yesterday')).'"');
+        $criteria->with = 'userAnswer';
+        $criteria->together = true;
+        $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
+        $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('yesterday')).'"');
         $criteria->limit = 20;
         $criteria->order = 't.date_added DESC';
 
