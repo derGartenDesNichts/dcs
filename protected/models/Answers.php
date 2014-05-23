@@ -100,4 +100,24 @@ class Answers extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    public function getExpiredAnswers()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+        /*
+		$criteria->compare('answer_id',$this->answer_id);
+		$criteria->compare('question_id',$this->question_id,true);
+		$criteria->compare('iteration_number',$this->iteration_number,true);
+		$criteria->compare('answers_array',$this->answers_array,true);
+		$criteria->compare('date_last_update',$this->date_last_update,true);
+        */
+        
+        $criteria->condition('date_added >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)');
+        
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 }

@@ -58,8 +58,16 @@ class QuestionsController extends Controller
     
     public function actionView($id)
     {
+        if(isset($_GET['voteId'])) {
+            $vote = UsersAnswers::model()->findByPk($_GET['voteId']);
+            $vote->answer = $_GET['vote'];
+            $vote->update();
+        }
         $question = Questions::model()->findByPk($id);
         
-        $this->render('view', array('data' => $question));
+        $data['userAnswer'] = UsersAnswers::model()->findByAttributes(array('user_id' => Yii::app()->user->id, 'question_id' => $question->question_id));
+        $data['question'] = $question;
+        
+        $this->render('view', array('data' => $data));
     }
 }

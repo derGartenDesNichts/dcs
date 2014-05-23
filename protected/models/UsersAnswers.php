@@ -44,6 +44,7 @@ class UsersAnswers extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'answers' => array(self::BELONGS_TO, 'Answers', array('answer_id' => 'answer_id')),
 		);
 	}
 

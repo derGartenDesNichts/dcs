@@ -57,7 +57,7 @@ foreach ($levels as $level)
 
 
 	<div class="buttons">
-		<?php echo CHtml::submitButton('Submit'); ?>
+		<?php echo CHtml::submitButton(tt('Submit')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
