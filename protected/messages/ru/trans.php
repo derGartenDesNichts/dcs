@@ -79,5 +79,11 @@ return array(
     'You have no messages'=>'У Вас нет сообщений',
     'Last message'=>'Последнее сообщение',
 
+    'Ukraine'=>'Украина',
+    'Russia'=>'Россия',
+
+    'Kharkiv distr.'=>'Харьковская',
+    'Kharkiv'=>'Харьков'
+
 
 );

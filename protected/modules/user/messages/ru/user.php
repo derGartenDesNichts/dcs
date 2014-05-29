@@ -132,6 +132,9 @@ return array(
     'Second Name'=>'Отчество',
     'Birthday'=>'Дата рождения',
     'Pass Number'=>'Номер пасспорта',
-    'Avatar'=>'Фото'
+    'Avatar'=>'Фото',
+
+    'Kharkiv distr.'=>'Харьковская',
+    'Kharkiv'=>'Харьков'
 );
 

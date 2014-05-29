@@ -1,4 +1,10 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
+<?php
+Yii::app()->clientScript->registerLocalScript('profileForm.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScript('assignment',
+    'var ajaxUrl = "'.Yii::app()->createUrl('/ajax/').'"',
+    CClientScript::POS_HEAD);
+
+$this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
 $this->breadcrumbs=array(
 	UserModule::t("Profile")=>array('profile'),
 	UserModule::t("Edit"),
@@ -76,12 +82,12 @@ $this->menu=array(
         <label>
             <?php echo tt('District') ?>
         </label>
-        <input type="text" name="UserLocation[district]">
+        <?php echo LocationHelper::getDistricts()?>
 
         <label>
             <?php echo tt('City') ?>
         </label>
-        <input type="text" name="UserLocation[city]">
+        <?php echo LocationHelper::getCities()?>
 
         <label>
             <?php echo tt('Street') ?>
