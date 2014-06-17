@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'comments':
  * @property integer $comment_id
- * @property string $question_id
+ * @property string $answer_id
  * @property string $user_id
  * @property string $text
  * @property string $date_added
@@ -28,12 +28,12 @@ class Comments extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('question_id, user_id, text, date_added', 'required'),
-			array('question_id', 'length', 'max'=>10),
+			array('answer_id, user_id, text, date_added', 'required'),
+			array('answer_id', 'length', 'max'=>10),
 			array('user_id', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('comment_id, question_id, user_id, text, date_added', 'safe', 'on'=>'search'),
+			array('comment_id, $answer_id, user_id, text, date_added', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -45,6 +45,8 @@ class Comments extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+            'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'userProfile' => array(self::BELONGS_TO, 'Profile', 'user_id'),
 		);
 	}
 
@@ -55,7 +57,7 @@ class Comments extends CActiveRecord
 	{
 		return array(
 			'comment_id' => tt('Comment'),
-			'question_id' => tt('Question'),
+			'answer_id' => tt('Answer ID'),
 			'user_id' => tt('User'),
 			'text' => tt('Text'),
 			'date_added' => tt('Date Added'),
@@ -81,7 +83,7 @@ class Comments extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('comment_id',$this->comment_id);
-		$criteria->compare('question_id',$this->question_id,true);
+		$criteria->compare('answer_id',$this->answer_id,true);
 		$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('text',$this->text,true);
 		$criteria->compare('date_added',$this->date_added,true);
@@ -90,6 +92,17 @@ class Comments extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    public function getComments($answer_id)
+    {
+        $criteria=new CDbCriteria;
+
+        $criteria->compare('answer_id',$answer_id,true);
+
+        return new CActiveDataProvider($this, array(
+            'criteria'=>$criteria,
+        ));
+    }
 
 	/**
 	 * Returns the static model of the specified AR class.
