@@ -13,45 +13,53 @@ class LocationHelper
             $countrySet .='<option value="'.$country.'">'.$country.'</option>';
 
         $countrySet .='</select>';*/
-        $countrySet = '<select id="country"><option value="Ukraine" name="UserLocation[country]" selected>'.tt('Ukraine').'</option><option value="Zimbabva">'.tt('Zimbabva').'</option></select>';
+        $countrySet = '<select id="country" name="UserLocation[country]"><option value="1" selected>'.tt('Ukraine').'</option></select>';
 
         return $countrySet;
     }
 
-    public static function getDistricts($countryId = null)
+    public static function getDistricts($locationSelected = 1, $countryId = 1)
     {
-        //Districts::model()->findAllByAttribute(array('country_id'=>$countryId));
-        $districts = 'Kharkiv distr.';//'Винницкая;Волынская;Днепропетровская;Донецкая;Житомирская;Закарпатская;Запорожская;Ивано- Франковская;Киевская;Кировоградская;Луганская;Львовская;Николаевская;Одесская;Полтавская;Ровенская;Сумская;Тернопольская;Харьковская;Херсонская;Хмельницкая;Черкасская;Черниговская;Черновицкая';
+        //$countryId = 1; //ukraine
+        $districts = Districts::model()->findAllByAttributes(array('country_id'=>$countryId));
 
-       // $districtsArr = explode(';',$districts);
+        $districtsSet = '<select id="districts" name="UserLocation[district]">';
 
-        $districtsSet = '<select id="districts">'.$districts;
-        $districtsSet .='<option value="'.$districts.'" name="UserLocation[district]">'.$districts.'</option>';
+        foreach($districts as $district)
+        {
+            if($district->district_id == $locationSelected)
+                $selected ='selected';
+            else
+                $selected = '';
 
-     //   foreach($districtsArr as $district)
-      //      $districtsSet .='<option value="'.$district.'" name="UserLocation[district]">'.$district.'</option>';
+            $districtsSet .='<option value="'.$district->district_id.'" '.$selected.'>'.$district->name.'</option>';
+        }
 
         $districtsSet .='</select>';
 
         return $districtsSet;
     }
 
-    public static function getCities($districtId = null)
+    public static function getCities($locationSelected = 1, $districtId = 1)
     {
-        //Districts::model()->findAllByAttribute(array('country_id'=>$countryId));
-        $city = 'Kharkiv';//'Винницкая;Волынская;Днепропетровская;Донецкая;Житомирская;Закарпатская;Запорожская;Ивано- Франковская;Киевская;Кировоградская;Луганская;Львовская;Николаевская;Одесская;Полтавская;Ровенская;Сумская;Тернопольская;Харьковская;Херсонская;Хмельницкая;Черкасская;Черниговская;Черновицкая';
+        $cities = Cities::model()->findAllByAttributes(array('district_id'=>$districtId));
 
-       // $districtsArr = explode(';',$districts);
+        $citySet = '<select id="city" name="UserLocation[city]">';
 
-        $citySet = '<select id="city">';
+       foreach($cities as $city)
+       {
+           if($city->city_id == $locationSelected)
+               $selected ='selected';
+           else
+               $selected = '';
 
-        $citySet .='<option value="'.$city.'" name="UserLocation[city]">'.$city.'</option>';
+           $citySet .='<option value="'.$city->city_id.'" '.$selected.'>'.$city->name.'</option>';
+       }
 
-        /*   foreach($districtsArr as $district)
-               $districtsSet .='<option value="'.$district.'" name="UserLocation[district]">'.$district.'</option>';
-   */
         $citySet .='</select>';
 
         return $citySet;
     }
+
+
 }

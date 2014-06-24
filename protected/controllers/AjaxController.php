@@ -11,7 +11,7 @@ class AjaxController extends Controller {
     public function accessRules() {
         return array(
             array('allow',
-                'actions'=>array('getDistricts'),
+                'actions'=>array('getDistricts','getCities'),
                 'users'=>array('*'),
             ),
             array('allow',
@@ -32,6 +32,19 @@ class AjaxController extends Controller {
 
             $districts = LocationHelper::getDistricts($countryId);
             echo $districts;
+        }
+
+        Yii::app()->end();
+    }
+
+    public function actionGetCities()
+    {
+        if(isset($_POST['districtId']) && !empty($_POST['districtId']))
+        {
+            $districtId = $_POST['districtId'];
+
+            $cities = LocationHelper::getCities(null,$districtId);
+            echo $cities;
         }
 
         Yii::app()->end();

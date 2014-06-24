@@ -8,8 +8,8 @@
 	<?php echo CHtml::encode($data->level_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
-	<?php echo CHtml::encode($data->description); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('place_id')); ?>:</b>
+	<?php echo CHtml::encode($data->place_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('date_added')); ?>:</b>

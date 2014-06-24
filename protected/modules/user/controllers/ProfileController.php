@@ -37,27 +37,30 @@ class ProfileController extends Controller
 			echo UActiveForm::validate(array($model,$profile));
 			Yii::app()->end();
 		}
-		
+
 		if(isset($_POST['User']))
 		{
-            //die(var_dump($_POST));
 			$model->attributes=$_POST['User'];
 			$profile->attributes=$_POST['Profile'];
 
-            if(isset($_POST['UserLocation']) && !empty($_POST['UserLocation']))
-            {
-                foreach($_POST['UserLocation'] as $location)
-                {
-                    $model = new UsersLocations;
-                    //$location['country']
-                }
-
-            }
-			
 			if($model->validate()&&$profile->validate()) {
 				$model->save();
 				$profile->save();
-				Yii::app()->user->setFlash('profileMessage',UserModule::t("Changes is saved."));
+
+                if(isset($_POST['UserLocation']) && !empty($_POST['UserLocation']))
+                {
+                    UsersLocations::model()->deleteAllByAttributes(array('user_id'=>Yii::app()->user->id));
+
+                    foreach($_POST['UserLocation'] as $location)
+                    {
+                        $locModel = new UsersLocations;
+                        $locModel->user_id = Yii::app()->user->id;
+                        $locModel->location_id = $location;
+                        $locModel->save();
+                    }
+                }
+
+				Yii::app()->user->setFlash('profileMessage',UserModule::t("Changes are saved."));
 				$this->redirect(array('/user/profile'));
 			} else $profile->validate();
 		}

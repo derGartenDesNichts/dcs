@@ -1,4 +1,10 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Registration");
+<?php
+Yii::app()->clientScript->registerLocalScript('profileForm.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScript('assignment',
+    'var ajaxUrl = "'.Yii::app()->createUrl('/ajax/').'"',
+    CClientScript::POS_HEAD);
+
+$this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Registration");
 $this->breadcrumbs=array(
 	UserModule::t("Registration"),
 );
@@ -68,6 +74,38 @@ $this->breadcrumbs=array(
 			}
 		}
 ?>
+    <h5><?php echo tt('Location')?></h5>
+
+    <label>
+        <?php echo tt('Country') ?>
+    </label>
+    <?php echo LocationHelper::getCountryDropdown()?>
+
+    <label>
+        <?php echo tt('District') ?>
+    </label>
+    <?php echo LocationHelper::getDistricts()?>
+
+    <label>
+        <?php echo tt('City') ?>
+    </label>
+    <?php echo LocationHelper::getCities()?>
+
+    <!--<label>
+        <?php /*echo tt('Street') ?>
+    </label>
+    <input type="text" name="UserLocation[street]">
+
+    <label>
+        <?php echo tt('House number') ?>
+    </label>
+    <input type="text" name="UserLocation[house]">
+
+    <label>
+        <?php echo tt('Apartment number')*/ ?>
+    </label>
+    <input type="text" name="UserLocation[apartment]">-->
+
 	<?php if (UserModule::doCaptcha('registration')): ?>
 		<?php echo $form->labelEx($model,'verifyCode'); ?>
 		

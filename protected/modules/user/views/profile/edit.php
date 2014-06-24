@@ -1,14 +1,19 @@
 <?php
+
 Yii::app()->clientScript->registerLocalScript('profileForm.js', CClientScript::POS_END);
+
 Yii::app()->clientScript->registerScript('assignment',
     'var ajaxUrl = "'.Yii::app()->createUrl('/ajax/').'"',
     CClientScript::POS_HEAD);
 
+
 $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Profile");
+
 $this->breadcrumbs=array(
 	UserModule::t("Profile")=>array('profile'),
 	UserModule::t("Edit"),
 );
+
 $this->menu=array(
 	((UserModule::isAdmin())
 		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
@@ -18,14 +23,21 @@ $this->menu=array(
     array('label'=>UserModule::t('Change password'), 'url'=>array('changepassword')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
-?><h1><?php echo UserModule::t('Edit profile'); ?></h1>
+
+?>
+
+<h1><?php echo UserModule::t('Edit profile'); ?></h1>
 
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
+
 <div class="success">
-<?php echo Yii::app()->user->getFlash('profileMessage'); ?>
+    <?php echo Yii::app()->user->getFlash('profileMessage'); ?>
 </div>
+
 <?php endif; ?>
+
 <div class="form">
+
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'profile-form',
 	'enableAjaxValidation'=>true,
@@ -79,18 +91,27 @@ $this->menu=array(
         </label>
         <?php echo LocationHelper::getCountryDropdown()?>
 
-        <label>
-            <?php echo tt('District') ?>
-        </label>
-        <?php echo LocationHelper::getDistricts()?>
+        <?php
+            foreach ($model->users_locations as $location) {
 
-        <label>
-            <?php echo tt('City') ?>
-        </label>
-        <?php echo LocationHelper::getCities()?>
+                if($location->locations->level_id == 2)
+                {
+                    echo '<label>'.tt('District').'</label>';
+                    echo LocationHelper::getDistricts($location->location_id);
+                    $districtId = $location->location_id;
+                }
 
-        <label>
-            <?php echo tt('Street') ?>
+                if($location->locations->level_id == 3)
+                {
+                    echo '<label>'.tt('City').'</label>';
+                    echo LocationHelper::getCities($location->location_id, $districtId);
+                }
+
+            }
+        ?>
+
+        <!--<label>
+            <?php /*echo tt('Street') ?>
         </label>
         <input type="text" name="UserLocation[street]">
 
@@ -100,9 +121,9 @@ $this->menu=array(
         <input type="text" name="UserLocation[house]">
 
         <label>
-            <?php echo tt('Apartment number') ?>
+            <?php echo tt('Apartment number')*/ ?>
         </label>
-        <input type="text" name="UserLocation[apartment]">
+        <input type="text" name="UserLocation[apartment]">-->
 
     <div class="controls">
         <?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save'), array('class'=>'btn btn-success')); ?>

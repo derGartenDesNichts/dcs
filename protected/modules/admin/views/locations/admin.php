@@ -44,7 +44,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'location_id',
 		'level_id',
-		'description',
+		'place_id',
 		'date_added',
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',
