@@ -102,4 +102,40 @@ class UsersAnswers extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    public function getCountOfAnswers($questionId, $answerId = false)
+    {
+        $answerSql = '';
+        if($answerId)
+            $answerSql = ' AND answer_id='.$answerId;
+        
+        $sql = <<<SQL
+          SELECT COUNT(*) as likes
+          FROM {$this->tableName()}
+          WHERE question_id LIKE :questionId AND answer = 1{$answerSql}
+SQL;
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(':questionId', $questionId);
+        $data['likes'] = $command->queryScalar();
+        
+        $sql = <<<SQL
+          SELECT COUNT(*) as dislikes
+          FROM {$this->tableName()}
+          WHERE question_id LIKE :questionId AND answer = 2{$answerSql}
+SQL;
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(':questionId', $questionId);
+        $data['dislikes'] = $command->queryScalar();
+        
+        $sql = <<<SQL
+          SELECT COUNT(*) as revision
+          FROM {$this->tableName()}
+          WHERE question_id LIKE :questionId AND answer = 3{$answerSql}
+SQL;
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(':questionId', $questionId);
+        $data['revision'] = $command->queryScalar();
+        
+        return $data;
+    }
 }

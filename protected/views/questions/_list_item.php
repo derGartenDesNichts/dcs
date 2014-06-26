@@ -13,7 +13,7 @@
         </div>
         <div class="span9">
             <div class="topic-heading">
-                <h4><?=$data->title?></h4>
+                <h4><?=CHtml::link($data->title, Yii::app()->createUrl('questions/view', array('id' => $data->question_id)))?></h4>
                             <span class="muted">
                                 <i class="icon-time"></i> <?php echo DateFormatHelper::setCustomDate($data->date_added) ?>
                             </span>

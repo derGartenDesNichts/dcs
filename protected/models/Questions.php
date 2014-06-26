@@ -120,14 +120,25 @@ class Questions extends CActiveRecord
 		return parent::model($className);
 	}
 
-    public function getNewQuestions()
+    public function getQuestions($type)
     {
         $criteria = new CDbCriteria();
-
+        
         $criteria->with = 'userAnswer';
         $criteria->together = true;
-        $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
-        $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('yesterday')).'"');
+        if($type == 'new') {
+            $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
+            $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('-7 day')).'"');
+        } elseif($type == 'my') {
+            $criteria->compare('t.user_id',Yii::app()->user->id,true);
+        } elseif($type == 'voted') {
+            $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
+            $criteria->addNotInCondition('userAnswer.answer', array(0));
+        } elseif($type == 'performing') {
+            $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
+            $criteria->compare('result','like',true);
+        }
+        
         $criteria->limit = 20;
         $criteria->order = 't.date_added DESC';
 
@@ -135,4 +146,5 @@ class Questions extends CActiveRecord
             'criteria'=>$criteria
         ));
     }
+    
 }

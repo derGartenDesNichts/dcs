@@ -40,6 +40,13 @@
         }
         ?>
     </div>
+    
+    <div id="answers-block">
+        <?php 
+                foreach ($data['allAnswer'] as $answerName => $answerCount)
+                    echo $answerName.': '.$answerCount.'<p>';
+        ?>
+    </div>
 
     <div align="right"><a class="btn btn-info" href="#post-reply" id="post-reply"><?php echo tt('Add Comment') ?></a></div>
 
@@ -70,6 +77,7 @@ $this->widget('bootstrap.widgets.TbListView', array(
             data: 'vote='+$(this).data('vote'),
             success: function(data) {
               $('#vote-block').html($(data).find('#vote-block').html());
+              $('#answers-block').html($(data).find('#answers-block').html());
             }
         });
      });
