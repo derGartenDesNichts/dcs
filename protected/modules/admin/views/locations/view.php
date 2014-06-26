@@ -20,7 +20,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'location_id',
 		'level_id',
-		'description',
+		'place_id',
 		'date_added',
 	),
 )); ?>

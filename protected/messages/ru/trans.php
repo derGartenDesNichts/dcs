@@ -83,7 +83,33 @@ return array(
     'Russia'=>'Россия',
 
     'Kharkiv distr.'=>'Харьковская',
-    'Kharkiv'=>'Харьков'
+    'Kharkiv'=>'Харьков',
+
+    'Autonomous Republic of Crimea'=>'Крым',
+    'Vinnytsia Oblast'=>'Винницкая область',
+    'Volyn Oblast'=>'Волынская область',
+    'Dnipropetrovsk Oblast'=>'Днепропетровская область',
+    'Donetsk Oblast'=>'Донецкая область',
+    'Zhytomyr Oblast'=>'Житомирская область',
+    'Zakarpattia Oblast'=>'Закарпатская область',
+    'Zaporizhia Oblast'=>'Запорожская область',
+    'Ivano-Frankivsk Oblast'=>'Ивано- Франковская область',
+    'Kiev Oblast'=>'Киевская область',
+    'Kirovohrad Oblast'=>'Кировоградская область',
+    'Luhansk Oblast'=>'Луганская область',
+    'Lviv Oblast'=>'Львовская область',
+    'Mykolaiv Oblast'=>'Николаевская область',
+    'Odessa Oblast'=>'Одесская область',
+    'Poltava Oblast'=>'Полтавская область',
+    'Rivne Oblast'=>'Ровенская область',
+    'Sumy Oblast'=>'Сумская область',
+    'Ternopil Oblast'=>'Тернопольская область',
+    'Kharkiv Oblast'=>'Харьковская область',
+    'Kherson Oblast'=>'Херсонская область',
+    'Khmelnytskyi Oblast'=>'Хмельницкая область',
+    'Cherkasy Oblast'=>'Черкасская область',
+    'Chernivtsi Oblast'=>'Черниговская область',
+    'Chernihiv Oblast'=>'Черновицкая область',
 
 
 );

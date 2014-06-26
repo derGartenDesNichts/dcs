@@ -22,7 +22,7 @@ $levels = Locations::model()->getUserLocations();
 $list = array();
 
 foreach ($levels as $level)
-    $list[$level['location_id']] = $level['description'];
+    $list[$level['level_id']] = $level['description'];
 
 ?>
 

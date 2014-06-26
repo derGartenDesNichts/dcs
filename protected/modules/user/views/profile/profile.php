@@ -80,8 +80,22 @@ $this->menu = $menu;
                 <span class="control-label">Locations</span>
                 <span class="controls">
                     <?php
+                    echo tt('Ukraine').'<br>';
+
                     foreach ($model->users_locations as $location) {
-                        echo $location->locations->description . '<br>';
+
+                        if($location->locations->level_id == 2)
+                        {
+                            $district = Districts::model()->findByPk($location->location_id);
+                            echo $district->name . '<br>';
+                        }
+
+                        if($location->locations->level_id == 3)
+                        {
+                            $city = Cities::model()->findByPk($location->location_id);
+                            echo $city->name . '<br>';
+                        }
+
                     }
                     ?>
                 </span>

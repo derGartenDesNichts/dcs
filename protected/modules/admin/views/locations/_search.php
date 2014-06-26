@@ -7,7 +7,7 @@
 
 	<?php echo $form->textFieldRow($model,'level_id',array('class'=>'span5','maxlength'=>10)); ?>
 
-	<?php echo $form->textFieldRow($model,'description',array('class'=>'span5','maxlength'=>255)); ?>
+	<?php echo $form->textFieldRow($model,'place_id',array('class'=>'span5','maxlength'=>255)); ?>
 
 	<?php echo $form->textFieldRow($model,'date_added',array('class'=>'span5')); ?>
 
