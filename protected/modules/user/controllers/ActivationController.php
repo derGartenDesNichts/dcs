@@ -17,7 +17,7 @@ class ActivationController extends Controller
 			    $this->render('/user/message',array('title'=>UserModule::t("User activation"),'content'=>UserModule::t("You account is active.")));
 			} elseif(isset($find->activkey) && ($find->activkey==$activkey)) {
 				$find->activkey = HashHelper::phpbbHash(microtime());
-				$find->status = 1;
+				//$find->status = 1;
 				$find->save();
 			    $this->render('/user/message',array('title'=>UserModule::t("User activation"),'content'=>UserModule::t("You account is activated.")));
 			} else {

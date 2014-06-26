@@ -7,8 +7,11 @@
                 </a>
             </strong>
         <?php
+
         if (!empty($data->userProfile->avatar))
-        echo '<img class="img-rounded" alt="" src="uploads/user-full/' . $data->userProfile->avatar . '">';
+            echo '<img class="img-rounded" alt="" src="/uploads/user-full/' . $data->userProfile->avatar . '">';
+        else
+            echo '<img class="img-rounded" alt="" src="/images/logo.jpg">';
         ?>
         </div>
         <div class="span9">
