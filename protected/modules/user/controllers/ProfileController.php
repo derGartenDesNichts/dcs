@@ -21,8 +21,21 @@ class ProfileController extends Controller
 	    ));
 	}
 
+    public function actionUserProfile($id)
+    {
+        $model = User::model()->findbyPk($id);
+        if($model===null)
+            throw new CHttpException(404,'The requested user does not exist.');
 
-	/**
+        $this->render('profile',array(
+            'model'=>$model,
+            'profile'=>$model->profile,
+        ));
+    }
+
+
+
+    /**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 */

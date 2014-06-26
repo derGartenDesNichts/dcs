@@ -1,17 +1,24 @@
-<?php $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Change password");
+<?php
+
+$this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Change password");
+
 $this->breadcrumbs=array(
 	UserModule::t("Profile") => array('/user/profile'),
 	UserModule::t("Change password"),
 );
-$this->menu=array(
-	((UserModule::isAdmin())
-		?array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
-		:array()),
-    //array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+
+$this->menu =array(
     array('label'=>UserModule::t('Profile'), 'url'=>array('/user/profile')),
     array('label'=>UserModule::t('Edit'), 'url'=>array('edit')),
     array('label'=>UserModule::t('Logout'), 'url'=>array('/user/logout')),
 );
+
+if(UserModule::isAdmin())
+    $this->menu += array(
+        array('label'=>UserModule::t('List User'), 'url'=>array('/user')),
+        array('label'=>UserModule::t('Manage Users'), 'url'=>array('/user/admin'))
+    );
+
 ?>
 
 <h1><?php echo UserModule::t("Change password"); ?></h1>
