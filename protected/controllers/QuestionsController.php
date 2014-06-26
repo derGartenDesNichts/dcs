@@ -30,6 +30,7 @@ class QuestionsController extends Controller
                 $answer = new Answers;
                 $answer->question_id = $question->question_id;
                 $answer->iteration_number = 1;
+                $answer->date_last_update = date("Y-m-d H:i:s");
                 $answer->save();
                 
                 $users = User::model()->getRandomUsersByLocation($_POST['Questions']['level_id']);
@@ -53,7 +54,11 @@ class QuestionsController extends Controller
     {
         $question = new Questions;
         
-        $this->render('list', array('question' => $question));
+        if(!Yii::app()->request->isAjaxRequest)
+            $this->render('list', array('questions' => $question->getQuestions('new')));
+        else {
+            $this->renderPartial('list', array( 'questions' => $question->getQuestions(str_replace('#', '', $_POST['type']))), false, true);
+        }
     }
     
     public function actionView($id)
@@ -63,9 +68,11 @@ class QuestionsController extends Controller
             $vote->answer = $_GET['vote'];
             $vote->update();
         }
-        $question = Questions::model()->findByPk($id);
+        $question = Questions::model()->findByPk($id);        
         
         $data['userAnswer'] = UsersAnswers::model()->findByAttributes(array('user_id' => Yii::app()->user->id, 'question_id' => $question->question_id));
+        $answerId = $data['userAnswer']->answer_id;
+        $data['allAnswer'] = UsersAnswers::model()->getCountOfAnswers($question->question_id);
         $data['question'] = $question;
         
         $this->render('view', array('data' => $data));
