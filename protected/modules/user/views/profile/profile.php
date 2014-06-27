@@ -26,7 +26,7 @@ $this->menu = $menu;
 <?php endif; ?>
 <div class="clearfix">
     <div class="user-avatar">
-        <?php echo CHtml::image(Yii::app()->createUrl($profile->getImageUrl(true)), '')?>
+        <?php echo CHtml::image(Yii::app()->baseUrl.$profile->getImageUrl(true))?>
     </div>
     <div class="form-view">
         <div class="form-view-row">
