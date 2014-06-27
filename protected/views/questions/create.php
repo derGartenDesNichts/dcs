@@ -18,11 +18,12 @@
 	),
 )); 
 
-$levels = Locations::model()->getUserLocations();
+$locations = Locations::model()->getUserLocations();
+
 $list = array();
 
-foreach ($levels as $level)
-    $list[$level['level_id']] = $level['description'];
+foreach ($locations as $location)
+    $list[$location['location_id']] = $location['description'];
 
 ?>
 
@@ -31,8 +32,7 @@ foreach ($levels as $level)
 	<?php echo $form->errorSummary($data); ?>
     
 		<?php echo $form->labelEx($data,'level_id'); ?>
-		<?php echo $form->dropDownList($data,'level_id',$list); ?>
-		<?php echo $form->error($data,'level_id'); ?>
+		<?php echo CHtml::dropDownList('Questions[location_id]','',$list); ?>
 
 		<?php echo $form->labelEx($data,'title'); ?>
 		<?php echo $form->textArea($data,'title',array('rows'=>1, 'cols'=>250)); ?>

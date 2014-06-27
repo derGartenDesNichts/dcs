@@ -8,8 +8,8 @@
 $this->pageTitle=Yii::app()->name;
 
 $avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avatar))) ?
-    Yii::app()->createUrl(Yii::app()->baseUrl.'/uploads/user-full/'.Yii::app()->user->avatar) :
-    Yii::app()->createUrl(Yii::app()->baseUrl.'/images/logo.jpg');
+    Yii::app()->baseUrl.'/uploads/user-full/'.Yii::app()->user->avatar :
+    Yii::app()->baseUrl.'/images/logo.jpg';
 ?>
 
 
