@@ -223,8 +223,8 @@ class Profile extends UActiveRecord
     public function getImageUrl($fullSize = false)
     {
         return (isset($this->avatar) && !empty($this->avatar))
-            ? '../' . $this->getImageRelativePath($fullSize)
-            : '../images/logo.jpg';
+            ? Yii::app()->baseUrl. $this->getImageRelativePath($fullSize)
+            : Yii::app()->baseUrl.'/images/logo.jpg';
     }
 
     /**
@@ -240,7 +240,7 @@ class Profile extends UActiveRecord
      */
     protected function getImageRelativePath($fullSize = false)
     {
-        $dir = $fullSize ? 'user-full' : 'user-thumb';
+        $dir = 'user-full';
 
         return '/uploads/' . $dir . '/' . $this->avatar;
     }
@@ -305,4 +305,6 @@ class Profile extends UActiveRecord
 
         $this->avatar = $this->user_id . '.' . $ext;
     }
+
+
 }

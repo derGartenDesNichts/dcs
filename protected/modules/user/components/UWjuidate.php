@@ -48,6 +48,11 @@ class UWjuidate {
 		
 		$id = $htmlOptions['id'];
 		$options['dateFormat'] = 'yy-mm-dd';
+
+        $currentYear = date('Y',time());
+        $options['yearRange'] = '1940:'.$currentYear;
+        $options['changeYear'] = 'true';
+
 		$options=CJavaScript::encode($options);
 		
 		$basePath=Yii::getPathOfAlias('user.views.asset');
@@ -58,7 +63,7 @@ class UWjuidate {
 		
 		$language = $this->params['language'];
 		if ($language!='en') {
-			$js = "jQuery('#{$id}').datepicker(jQuery.extend({showMonthAfterYear:false}, jQuery.datepicker.regional['{$language}'], {$options}));";
+			$js = "jQuery('#{$id}').datepicker(jQuery.extend({showMonthAfterYear:true}, jQuery.datepicker.regional['{$language}'], {$options}));";
 			$cs->registerScriptFile($baseUrl.'/js/jquery-ui-i18n.min.js');
 		} else $js = "jQuery('#{$id}').datepicker({$options});";
 
