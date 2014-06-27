@@ -106,7 +106,7 @@ class Locations extends CActiveRecord
 		$table = $this->tableName();
 
         $sql = <<<SQL
-                SELECT lev.description, l.level_id
+                SELECT lev.description, u.location_id
                 FROM {$table} l
                   INNER JOIN users_locations u ON (u.location_id = l.location_id)
                   INNER JOIN levels lev ON (lev.level_id = l.level_id)
@@ -115,7 +115,7 @@ SQL;
         $command = Yii::app()->db->createCommand($sql);
         $command->bindValue(':userId', $userId);
         $levels = $command->queryAll();
-
+        
         return $levels;
 	}
 }

@@ -18,7 +18,10 @@ class QuestionsController extends Controller
             $question->user_id = Yii::app()->user->id;
             $question->date_added = date("Y-m-d H:i:s");            
             
-            $users = User::model()->getUserCountByLocation($_POST['Questions']['level_id']);
+            $users = User::model()->getUserCountByLocation($_POST['Questions']['location_id']);
+            $location = Locations::model()->findByPk($_POST['Questions']['location_id']);
+            
+            $question->level_id = $location->level_id;
             
             if($users > 9)
                 $question->iteration_count = strlen($users)-1;
@@ -33,17 +36,19 @@ class QuestionsController extends Controller
                 $answer->date_last_update = date("Y-m-d H:i:s");
                 $answer->save();
                 
-                $users = User::model()->getRandomUsersByLocation($_POST['Questions']['level_id']);
+                $users = User::model()->getRandomUsersByLocation($_POST['Questions']['location_id']);
                 
                 foreach ($users as $user) {
                     $userAnswer = new UsersAnswers;
                     $userAnswer->user_id = $user['id'];
                     $userAnswer->answer_id = $answer->answer_id;
                     $userAnswer->question_id = $question->question_id;
-                    $userAnswer->save();
+                    if($userAnswer->save()) {
+                        mail($user['email'], 'DCS: You have new vote', CHtml::link($question->title, $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id))));
+                    }
                 }
                 
-                $success = true;
+                $this->redirect('list');
             }
         }
         

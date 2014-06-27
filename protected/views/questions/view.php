@@ -63,6 +63,7 @@ $this->widget('bootstrap.widgets.TbListView', array(
     'itemView'=>'/questions/_comment_view',
     'summaryText'=>false,
     'ajaxUpdate' => false,
+    'emptyText' => tt('no comments'),
     'htmlOptions' => array(
         'class' => 'topic-list'
     ),
