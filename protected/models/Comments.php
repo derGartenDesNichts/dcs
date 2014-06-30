@@ -103,6 +103,28 @@ class Comments extends CActiveRecord
             'criteria'=>$criteria,
         ));
     }
+    
+    public function getCommentsCount($questionId, $userId = null)
+    {
+        if(!$userId)
+            $userId = Yii::app()->user->id;
+        
+        $table = $this->tableName();               
+        
+        $sql = <<<SQL
+                SELECT COUNT(*) 
+                FROM {$table} c
+                    INNER JOIN answers a ON (a.answer_id = c.answer_id)
+                    INNER JOIN questions q ON (q.question_id = a.question_id)
+                    INNER JOIN users_answers u ON (a.answer_id = u.answer_id)
+                WHERE a.question_id = :questionId AND u.user_id = :userId;
+SQL;
+        $command = Yii::app()->db->createCommand($sql);
+        $command->bindValue(':userId', $userId);
+        $command->bindValue(':questionId', $questionId);        
+        
+        return $command->queryScalar();
+    }
 
 	/**
 	 * Returns the static model of the specified AR class.

@@ -16,7 +16,7 @@ $avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avata
 
 <?php
 $this->menu=array(
-    array('label'=>CHtml::image($avatarUrl), 'url'=>'/user/profile'),
+    array('label'=>'<div class="span3">'.CHtml::image($avatarUrl).'</div>', 'url'=>'/user/profile'),
     array('label'=>tt('Profile'), 'url'=>array('/user/profile')),
     array(
         'label'=>(Yii::app()->user->model()->amountOfUnreadMessages)? tt('My Messages').' <b>('.Yii::app()->user->model()->amountOfUnreadMessages.')</b>': tt('My Messages'),

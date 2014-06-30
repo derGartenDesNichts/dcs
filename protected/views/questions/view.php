@@ -30,13 +30,13 @@
         if(!$data['userAnswer']->answers->answers_array) {
 
             if($data['userAnswer']->answer != 1)
-                echo CHtml::link('like', '#', array('data-vote' => 1, 'class' => 'vote')).'<p>';
+                echo CHtml::link(tt('like'), '#', array('data-vote' => 1, 'class' => 'vote')).'<p>';
 
             if($data['userAnswer']->answer != 2)
-                echo CHtml::link('dislike', '#', array('data-vote' => 2, 'class' => 'vote')).'<p>';
+                echo CHtml::link(tt('dislike'), '#', array('data-vote' => 2, 'class' => 'vote')).'<p>';
 
             if($data['userAnswer']->answers->iteration_number == 1 && $data['userAnswer']->answer != 3)
-                echo CHtml::link('revision', '#', array('data-vote' => 3, 'class' => 'vote')).'<p>';
+                echo CHtml::link(tt('revision'), '#', array('data-vote' => 3, 'class' => 'vote')).'<p>';
         }
         ?>
     </div>
@@ -44,7 +44,7 @@
     <div id="answers-block">
         <?php 
                 foreach ($data['allAnswer'] as $answerName => $answerCount)
-                    echo $answerName.': '.$answerCount.'<p>';
+                    echo tt($answerName).': '.$answerCount.'<p>';
         ?>
     </div>
 

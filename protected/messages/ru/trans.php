@@ -110,6 +110,17 @@ return array(
     'Cherkasy Oblast'=>'Черкасская область',
     'Chernivtsi Oblast'=>'Черниговская область',
     'Chernihiv Oblast'=>'Черновицкая область',
+    
+    
+    'revision'=>'Отправить на доработку',
+    'like'=>'За',
+    'dislike'=>'Против',
+    'likes'=>'За',
+    'dislikes'=>'Против',
+    'country'=>'страна',
+    'city'=>'город',
+    'district'=>'область',
+    'All comments'=>'комментариев',
 
 
 );

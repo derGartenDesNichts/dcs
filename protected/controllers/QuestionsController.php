@@ -44,7 +44,14 @@ class QuestionsController extends Controller
                     $userAnswer->answer_id = $answer->answer_id;
                     $userAnswer->question_id = $question->question_id;
                     if($userAnswer->save()) {
-                        mail($user['email'], 'DCS: You have new vote', CHtml::link($question->title, $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id))));
+                        /*$mail = new YiiMailer();
+                        //$mail->clearLayout();//if layout is already set in config
+                        $mail->setFrom('functionw@contact.com', 'Direct COntrol System');
+                        $mail->setTo($user['email']);
+                        $mail->setSubject('DCS: You have new vote');
+                        $mail->setBody('Simple message');
+                        $mail->send();*/
+                        mail($user['email'], 'DCS: You have new vote', $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id)));
                     }
                 }
                 

@@ -1,3 +1,4 @@
+
 <div class="well">
     <div class="row-fluid" id="<?= $data->question_id ?>">
         <div class="span3">
@@ -18,7 +19,7 @@
             <div class="topic-heading">
                 <h4><?=CHtml::link($data->title, Yii::app()->createUrl('questions/view', array('id' => $data->question_id)))?></h4>
                             <span class="muted">
-                                <i class="icon-time"></i> <?php echo DateFormatHelper::setCustomDate($data->date_added) ?>
+                                <i class="icon-time"></i> <?php echo DateFormatHelper::setCustomDate($data->date_added) ?> <?php echo tt('All comments').' '.Comments::model()->getCommentsCount($data->question_id)?>
                             </span>
             </div>
         <div class="content"><?php

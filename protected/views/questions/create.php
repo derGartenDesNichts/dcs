@@ -23,7 +23,7 @@ $locations = Locations::model()->getUserLocations();
 $list = array();
 
 foreach ($locations as $location)
-    $list[$location['location_id']] = $location['description'];
+    $list[$location['location_id']] = tt($location['description']);
 
 ?>
 
