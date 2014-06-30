@@ -125,6 +125,20 @@ class AdminController extends Controller
 				}
 				$model->save();
 				$profile->save();
+
+                if(isset($_POST['UserLocation']) && !empty($_POST['UserLocation']))
+                {
+                    UsersLocations::model()->deleteAllByAttributes(array('user_id'=>Yii::app()->user->id));
+
+                    foreach($_POST['UserLocation'] as $location)
+                    {
+                        $locModel = new UsersLocations;
+                        $locModel->user_id = Yii::app()->user->id;
+                        $locModel->location_id = $location;
+                        $locModel->save();
+                    }
+                }
+
 				$this->redirect(array('view','id'=>$model->id));
 			} else $profile->validate();
 		}
