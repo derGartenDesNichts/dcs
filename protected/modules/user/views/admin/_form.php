@@ -52,6 +52,43 @@
 			}
 		}
 ?>
+    <label>
+        <?php echo tt('Country') ?>
+    </label>
+    <?php echo LocationHelper::getCountryDropdown()?>
+
+    <?php
+
+    if(!empty($model->users_locations))
+    {
+        foreach ($model->users_locations as $location) {
+
+            if($location->locations->level_id == 2)
+            {
+                echo '<label>'.tt('District').'</label>'.
+                LocationHelper::getDistricts($location->location_id);
+                $districtId = $location->location_id;
+            }
+
+            if($location->locations->level_id == 3)
+            {
+                echo '<label>'.tt('City').'</label>'.
+                LocationHelper::getCities($location->location_id, $districtId);
+            }
+
+        }
+    }
+    else
+    {
+        echo '<label>'.tt('District').'</label>'.
+        LocationHelper::getDistricts();
+
+        echo '<label>'.tt('City').'</label>'.
+        LocationHelper::getCities();
+    }
+
+    ?>
+
     <div class="controls">
 		<?php echo CHtml::submitButton($model->isNewRecord ? UserModule::t('Create') : UserModule::t('Save'), array('class'=>'btn btn-success')); ?>
     </div>
