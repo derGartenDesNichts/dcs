@@ -111,5 +111,7 @@ return array(
     'Chernivtsi Oblast'=>'Черниговская область',
     'Chernihiv Oblast'=>'Черновицкая область',
 
+    'Send message' =>'Отправить сообщение'
+
 
 );

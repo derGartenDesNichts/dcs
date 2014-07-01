@@ -26,7 +26,18 @@ $this->menu = $menu;
 <?php endif; ?>
 <div class="clearfix">
     <div class="user-avatar">
-        <?php echo CHtml::image($profile->getImageUrl(true))?>
+        <?php echo CHtml::image($profile->getImageUrl(true));
+
+        if (!$itIsCurrentUser)
+            echo '<p>
+                            <a href="' . Yii::app()->createURL('messages/conversationWith', array('userId' => $model->id)) . '" class = "btn btn-info">
+                                <i class="icon-envelope" rel="tooltip" title="'.tt('Send message').'"></i>'.
+                tt('Send message').
+                '</a>
+          </p>';
+
+        ?>
+
     </div>
     <div class="form-view">
         <div class="form-view-row">

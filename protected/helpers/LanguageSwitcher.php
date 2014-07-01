@@ -7,7 +7,11 @@ class LanguageSwitcher
         $links = '';
         foreach (DMultilangHelper::suffixList() as $suffix => $name){
             $url = '/' . ($suffix ? trim($suffix, '_') . '/' : '') . $currentUrl;
-            $links .= ' '.CHtml::link($name, $url);
+
+            $imageUrl = Yii::app()->baseUrl . '/images/'.$name .'.png';
+            $image = CHtml::image($imageUrl, $name, array('width'=>25,'height'=>25));
+
+            $links .= ' '.CHtml::link($image, $url);
         }
 
         return $links;
