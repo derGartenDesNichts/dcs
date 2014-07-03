@@ -14,9 +14,9 @@ else
 ?>
 <div class="user-item well <?php echo ($data->getAmountOfUnreadMessages($data->id)) ? 'well-blue' : 'well-white' ?>" onclick="return location.href='<?php echo Yii::app()->createUrl('messages/conversationwith', array('userId' => $data->id, '#'=> $messageId))?>'">
 	<div class="photo-holder">
-		<a href="#">
-			<?php echo CHtml::image(Yii::app()->createUrl($data->profile->imageUrl));?>
-		</a>
+        <a href="#">
+            <?php echo CHtml::image($data->profile->imageUrl, '', array('width'=>'100','height'=>'100'));?>
+        </a>
 	</div>
 	<div class="text-holder">
         <div class="span4">

@@ -240,7 +240,10 @@ class Profile extends UActiveRecord
      */
     protected function getImageRelativePath($fullSize = false)
     {
-        $dir = 'user-full';
+        if($fullSize)
+            $dir = 'user-full';
+        else
+            $dir = 'user-thumb';
 
         return '/uploads/' . $dir . '/' . $this->avatar;
     }

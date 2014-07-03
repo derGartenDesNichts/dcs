@@ -6,21 +6,14 @@
 @var $newQuestions Questions */
 
 $this->pageTitle=Yii::app()->name;
+$avatar = Profile::model()->findByPk(Yii::app()->user->id)->getImageUrl(true);
 
-$avatarUrl = (isset(Yii::app()->user->avatar) && (!empty(Yii::app()->user->avatar))) ?
-    Yii::app()->baseUrl.'/uploads/user-full/'.Yii::app()->user->avatar :
-    Yii::app()->baseUrl.'/images/logo.jpg';
-?>
-
-
-
-<?php
 $this->menu=array(
-    array('label'=>CHtml::image($avatarUrl), 'url'=>'/user/profile'),
+    array('label'=>CHtml::image($avatar), 'url'=>'/user/profile'),
     array('label'=>tt('Profile'), 'url'=>array('/user/profile')),
     array(
         'label'=>(Yii::app()->user->model()->amountOfUnreadMessages)? tt('My Messages').' <b>('.Yii::app()->user->model()->amountOfUnreadMessages.')</b>': tt('My Messages'),
-        'url'=>array('/messages/LastUsersList')),
+        'url'=>array('/messages/MessagesUsersList')),
     array('label'=>tt('Propositions'), 'url'=>array('/questions/list')),
     array('label'=>tt('Create Proposition'), 'url'=>array('/questions/new')),
 );

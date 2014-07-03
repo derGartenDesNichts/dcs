@@ -31,7 +31,7 @@ class MessagesController extends Controller
     {
         return array(
             array('allow',
-                'actions'=>array('conversationwith', 'lastuserslist'),
+                'actions'=>array('conversationWith', 'messagesUsersList','deleteAllMessages','deleteMessage'),
                 'users'=>array('@'),
             ),
             array('deny',  // deny all users
@@ -97,9 +97,9 @@ class MessagesController extends Controller
         ));
     }
 
-    public function actionLastUsersList()
+    public function actionMessagesUsersList()
     {
-        $lastUserIds =
+        $userIds =
             Yii::app()->db->createCommand()
                 ->select('IF(m.user_from = :USER_1, m.user_to, m.user_from) AS userId')
                 ->from('messages as m')
@@ -108,16 +108,82 @@ class MessagesController extends Controller
                         ':USER_1' => $this->currUserId,
                     )
                 )
-                ->group('userId')
-                ->order('created DESC')
-                ->limit(10)
+                ->order('m.is_read ASC, m.created DESC')
                 ->queryColumn();
 
-        $lastUsers = User::model()->findAllByPk($lastUserIds);
+        $users = null;
+        $userIds = array_unique($userIds);
+
+        if(!empty($userIds))
+        {
+            $criteria = new CDbCriteria;
+            $idArr = implode(',',$userIds);
+            $criteria->order = "FIELD(id, $idArr)";
+            $users = User::model()->findAllByPk($userIds, $criteria);
+        }
 
         $this->render('last_users_list', array(
-            'lastUsers' => $lastUsers
+            'users' => $users
         ));
+    }
+
+        public function actionDeleteAllMessages()
+    {
+        $userFrom = Yii::app()->request->getPost('user_from',null);
+
+        if(!empty($userFrom))
+        {
+            try{
+                Yii::app()->db->createCommand()
+                    ->delete(
+                        'messages',
+                        'user_from IN(:user_from, :user_to) AND user_to IN(:user_to, :user_from)',
+                        array(
+                            ':user_from'=>$userFrom,
+                            ':user_to'=>Yii::app()->user->id
+                        )
+                    );
+            } catch(Exception $e)
+            {
+                echo '<div class="alert alert-block alert-error">Error. Messages were not removed.</div>';
+                Yii::app()->user->setFlash('error',$e->getMessage());
+            }
+
+            echo '<div class="alert alert-block alert-success" id="user-message">Messages were removed.</div>';
+        }
+        else
+            echo '<div class="alert alert-block alert-error" id="user-message">Error. Empty user ID. Messages were not removed.</div>';
+
+        Yii::app()->end();
+    }
+
+        public function actionDeleteMessage()
+    {
+        $messageId = Yii::app()->request->getPost('message_id',null);
+
+        if(!empty($messageId))
+        {
+            try{
+                Yii::app()->db->createCommand()
+                    ->delete(
+                        'messages',
+                        'id=:id',
+                        array(
+                            ':id'=>$messageId
+                        )
+                    );
+            } catch(Exception $e)
+            {
+                echo '<div class="alert alert-block alert-error">Error. Message was not removed.</div>';
+                Yii::app()->user->setFlash('error',$e->getMessage());
+            }
+
+            echo '<div class="alert alert-block alert-success" id="user-message">Messages was removed.</div>';
+        }
+        else
+            echo '<div class="alert alert-block alert-error" id="user-message">Error. Empty message ID. Messages was not removed.</div>';
+
+        Yii::app()->end();
     }
 
     private function getCreatedLimit($case)
