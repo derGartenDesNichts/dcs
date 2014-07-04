@@ -121,8 +121,9 @@ class Messages extends CActiveRecord
     {
         $criteria = array(
             'order' => 'created DESC',
-            'condition'=>'user_from IN('.$user_from.','.$user_to.') AND user_from IN('.$user_from.','.$user_to.')'
+            'condition'=>'user_from IN('.$user_from.','.$user_to.') AND user_to IN('.$user_from.','.$user_to.')'
         );
+
         return Messages::model()->find($criteria);
     }
 }

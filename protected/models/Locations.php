@@ -124,10 +124,10 @@ SQL;
         if($this->level_id == 1)
             return 'Україна';
         elseif($this->level_id == 2) {            
-            $district = Districts::model()->findByPk($this->place_id);
+            $district = Districts::model()->findByPk($this->location_id);
             return $district->name;
         }elseif($this->level_id == 3) {
-            $city = Cities::model()->findByPk($this->place_id);
+            $city = Cities::model()->findByPk($this->location_id);
             return $city->name;
         }
 	}

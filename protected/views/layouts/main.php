@@ -103,7 +103,7 @@
         <div class="footer-holder">
             <div class="footer-frame">
                 <div class="container">
-                    <p> Some text bla bla </p>
+                    <p> Maybe some rights reserved </p>
                 </div>
             </div>
         </div>

@@ -16,29 +16,28 @@ if ($itIsCurrentUser) {
 }
 $this->menu = $menu;
 
-?><h1 class="content-title"><?php echo UserModule::t('Profile'); ?></h1>
-
+?>
+<h1 class="content-title"><?=UserModule::t('Profile')?></h1>
 
 <?php if(Yii::app()->user->hasFlash('profileMessage')): ?>
     <div class="alert alert-success">
         <?php echo Yii::app()->user->getFlash('profileMessage'); ?>
     </div>
 <?php endif; ?>
+
 <div class="clearfix">
+
     <div class="user-avatar">
         <?php echo CHtml::image($profile->getImageUrl(true));
-
-        if (!$itIsCurrentUser)
-            echo '<p>
-                            <a href="' . Yii::app()->createURL('messages/conversationWith', array('userId' => $model->id)) . '" class = "btn btn-info">
-                                <i class="icon-envelope" rel="tooltip" title="'.tt('Send message').'"></i>'.
-                tt('Send message').
-                '</a>
-          </p>';
-
-        ?>
-
+        if (!$itIsCurrentUser) { ?>
+        <p>
+            <a href="<?=Yii::app()->createURL('messages/conversationWith', array('userId' => $model->id))?>" class = "btn btn-info">
+                <i class="icon-envelope" rel="tooltip" title="'.tt('Send message').'"></i><?=tt('Send message')?>
+            </a>
+        </p>
+        <?php } ?>
     </div>
+
     <div class="form-view">
         <div class="form-view-row">
             <span class="control-label"><?php echo CHtml::encode($model->getAttributeLabel('username')); ?></span>
@@ -60,8 +59,7 @@ $this->menu = $menu;
             <?php
             }
         }
-        ?>
-        <?php if (!empty($profile->website)) :
+        if (!empty($profile->website)) :
 
             if(strpos($profile->website,'http://') !== 0)
                 $profile->website = 'http://' . $profile->website;

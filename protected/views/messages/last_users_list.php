@@ -3,8 +3,12 @@
  *
  * @var MessagesController $this
  */
-if (!empty($lastUsers)) {
-    $provider = new CArrayDataProvider($lastUsers);
+if (!empty($users)) {
+    $provider = new CArrayDataProvider($users,array(
+        'pagination'=>array(
+            'pageSize'=>10,
+        ),
+    ));
 
     $this->widget('zii.widgets.CListView', array(
         'id' => 'user-list',

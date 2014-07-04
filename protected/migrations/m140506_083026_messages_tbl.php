@@ -12,7 +12,7 @@ class m140506_083026_messages_tbl extends CDbMigration
             'user_to' => 'int(11) NOT NULL',
             'text' => 'text',
             'created' => 'datetime',
-            'is_read'=> 'int(8)',
+            'is_read'=> 'int(8) DEFAULT 0',
         ), $this->MySqlOptions);
     }
 

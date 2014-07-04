@@ -1,38 +1,17 @@
 <div class="well">
-    <div class="row-fluid" id="<?= $data['question']->question_id ?>">
-        <div class="span3">
-            <strong class="user-title">
-                <a href="<?php echo Yii::app()->createURL('user/profile/userProfile', array('id' => $data['question']->user_id)); ?>">
-                    <?=$data['question']->userProfile->first_name .' '. $data['question']->userProfile->last_name ?>
-                </a>
-            </strong>
-            <?php
-            if (!empty($data['question']->userProfile->avatar))
-                echo '<img class="img-rounded" alt="" src="'.Yii::app()->baseUrl.'/uploads/user-full/' . $data['question']->userProfile->avatar . '">';
-            else
-                echo '<img class="img-rounded" alt="" src="'.Yii::app()->baseUrl.'/images/logo.jpg">';
+    <div class="row-fluid" id="<?=$data['question']->question_id ?>">
 
-            $isCurrentUser = $data['question']->user->id == Yii::app()->user->id;
-            if (!$isCurrentUser)
-                echo '<p>
-                            <a href="' . Yii::app()->createURL('messages/conversationWith', array('userId' => $data['question']->user->id)) . '">
-                                <i class="icon-envelope" rel="tooltip" title="'.tt('Send message').'"></i>'.
-                                tt('Send message').
-                            '</a>
-                      </p>';
-            ?>
-        </div>
+        <?php $this->renderPartial('_user_info',array('data'=>$data['question'], 'allAnswer' => $data['allAnswer'])) ?>
+
         <div class="span9">
             <div class="topic-heading">
                 <h4><?=$data['question']->title?></h4>
-                            <span class="muted">
-                                <i class="icon-time"></i> <?php echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($data['userAnswer']->answers->date_last_update) ?>
-                            </span>
+                <?php echo tt('question level').': '.$data['question']->location_name;?>
+                <span class="muted">
+                    <i class="icon-time"></i> <?php echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($data['userAnswer']->answers->date_last_update) ?>
+                </span>
             </div>
-            <div class="content"><?=$data['question']->text; ?>
-            </div>
-
-
+            <div class="content"><?=$data['question']->text?></div>
         </div>
     </div>
 
