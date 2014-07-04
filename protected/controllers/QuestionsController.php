@@ -4,7 +4,7 @@ class QuestionsController extends Controller
 {
     public $defaultAction = 'home';
     public $layout='//layouts/questions';    
-
+    public $listItem = '';
 	public function actionNew()
 	{
 		$question = new Questions;
@@ -27,6 +27,8 @@ class QuestionsController extends Controller
                 $question->iteration_count = strlen($users)-1;
             else
                 $question->iteration_count = 1;
+            
+            $question->location_name = $location->area;
             
             if($question->save()) {
                 
@@ -51,7 +53,7 @@ class QuestionsController extends Controller
                         $mail->setSubject('DCS: You have new vote');
                         $mail->setBody('Simple message');
                         $mail->send();*/
-                        mail($user['email'], 'DCS: You have new vote', $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id)));
+                        //mail($user['email'], 'DCS: You have new vote', $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id)));
                     }
                 }
                 
@@ -66,8 +68,10 @@ class QuestionsController extends Controller
     {
         $question = new Questions;
         
-        if(!Yii::app()->request->isAjaxRequest)
+        if(!Yii::app()->request->isAjaxRequest) {
+            $this->listItem = 'new';
             $this->render('list', array('questions' => $question->getQuestions('new')));
+        }
         else {
             $this->renderPartial('list', array( 'questions' => $question->getQuestions(str_replace('#', '', $_POST['type']))), false, true);
         }

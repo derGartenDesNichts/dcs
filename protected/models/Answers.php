@@ -12,7 +12,9 @@
  */
 class Answers extends CActiveRecord
 {
-	/**
+    const ITERATION_TIME = 7;
+
+    /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -103,6 +105,6 @@ class Answers extends CActiveRecord
     
     public function getExpiredAnswers()
 	{		
-        return $this->findAll('date_last_update < DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) AND answers_array = ""');
+        return $this->findAll('date_last_update < DATE_SUB(CURRENT_DATE, INTERVAL '.Answers::ITERATION_TIME.' DAY) AND answers_array = ""');
 	}
 }

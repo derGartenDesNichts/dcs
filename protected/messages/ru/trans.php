@@ -122,5 +122,15 @@ return array(
     'district'=>'область',
     'All comments'=>'комментариев',
 
+    'Send message' =>'Отправить сообщение',
+    'the voting ends in'=>'голосование истекает через',
+    'On Revision'=>'На Доработке',
+    'Denied'=>'Отклонены',
+    'question level'=>'уровень вопроса',
+    
+    
+    //''=>'',
+    
+
 
 );

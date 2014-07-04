@@ -182,11 +182,11 @@ $config = array(
 
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'admin@example.com',
+		'adminEmail'=>'contact@functionw.com',
         'translatedLanguages'=>array(
-            'ru'=>'Ru',
-            'en'=>'En',
-            'ua'=>'Ua',
+            'ru'=>'ru',
+            'en'=>'en',
+           // 'ua'=>'Ua',
         ),
         'defaultLanguage'=>'ru',
 

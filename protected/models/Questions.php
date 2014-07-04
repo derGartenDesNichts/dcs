@@ -36,10 +36,10 @@ class Questions extends CActiveRecord
 			array('user_id', 'numerical', 'integerOnly'=>true),
 			array('level_id, iteration_count', 'length', 'max'=>10),
 			array('answer, result', 'length', 'max'=>255),
-			array('expired_date', 'safe'),
+			array('expired_date, location_name', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('question_id, user_id, level_id, iteration_count, answer, text, date_added, expired_date, result, title', 'safe', 'on'=>'search'),
+			array('question_id, user_id, level_id, iteration_count, answer, text, date_added, expired_date, result, title, location_name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -127,8 +127,9 @@ class Questions extends CActiveRecord
         $criteria->with = 'userAnswer';
         $criteria->together = true;
         if($type == 'new') {
+            $criteria->addCondition('t.result = ""');
             $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
-            $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('-7 day')).'"');
+            $criteria->addCondition('date_added>"'.date('Y-m-d',strtotime('- '.Answers::ITERATION_TIME.' day')).'"');
         } elseif($type == 'my') {
             $criteria->compare('t.user_id',Yii::app()->user->id,true);
         } elseif($type == 'voted') {
@@ -137,7 +138,14 @@ class Questions extends CActiveRecord
         } elseif($type == 'performing') {
             $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
             $criteria->compare('result','like',true);
+        }elseif($type == 'denied') {
+            $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
+            $criteria->compare('result','dislike',true);
+        } elseif($type == 'revision') {
+            $criteria->compare('userAnswer.user_id', Yii::app()->user->id ,true);
+            $criteria->compare('result','revision',true);
         }
+        
         
         $criteria->limit = 20;
         $criteria->order = 't.date_added DESC';

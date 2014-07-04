@@ -3,19 +3,30 @@
         <div class="span3">
             <strong class="user-title">
                 <a href="<?php echo Yii::app()->createURL('user/profile/userProfile', array('id' => $data['question']->user_id)); ?>">
-                    <?=$data['question']->user->username ?>
+                    <?=$data['question']->userProfile->first_name .' '. $data['question']->userProfile->last_name ?>
                 </a>
             </strong>
             <?php
             if (!empty($data['question']->userProfile->avatar))
-                echo '<img class="img-rounded" alt="" src="uploads/user-full/' . $data['question']->userProfile->avatar . '">';
+                echo '<img class="img-rounded" alt="" src="'.Yii::app()->baseUrl.'/uploads/user-full/' . $data['question']->userProfile->avatar . '">';
+            else
+                echo '<img class="img-rounded" alt="" src="'.Yii::app()->baseUrl.'/images/logo.jpg">';
+
+            $isCurrentUser = $data['question']->user->id == Yii::app()->user->id;
+            if (!$isCurrentUser)
+                echo '<p>
+                            <a href="' . Yii::app()->createURL('messages/conversationWith', array('userId' => $data['question']->user->id)) . '">
+                                <i class="icon-envelope" rel="tooltip" title="'.tt('Send message').'"></i>'.
+                                tt('Send message').
+                            '</a>
+                      </p>';
             ?>
         </div>
         <div class="span9">
             <div class="topic-heading">
                 <h4><?=$data['question']->title?></h4>
                             <span class="muted">
-                                <i class="icon-time"></i> <?php echo DateFormatHelper::setCustomDate($data['question']->date_added) ?>
+                                <i class="icon-time"></i> <?php echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($data['userAnswer']->answers->date_last_update) ?>
                             </span>
             </div>
             <div class="content"><?=$data['question']->text; ?>
@@ -30,13 +41,21 @@
         if(!$data['userAnswer']->answers->answers_array) {
 
             if($data['userAnswer']->answer != 1)
-                echo CHtml::link(tt('like'), '#', array('data-vote' => 1, 'class' => 'vote')).'<p>';
+            {
+                $imageUrl = Yii::app()->baseUrl.'/images/like.png';
+                $likeImg = CHtml::image($imageUrl, 'like',array('width'=>25,'height'=>25));
+                echo CHtml::link($likeImg, '#', array('data-vote' => 1, 'class' => 'btn btn-small vote', 'rel'=>"tooltip", 'title'=>tt('Yes'))).' ';
+            }
 
             if($data['userAnswer']->answer != 2)
-                echo CHtml::link(tt('dislike'), '#', array('data-vote' => 2, 'class' => 'vote')).'<p>';
+            {
+                $imageUrl = Yii::app()->baseUrl.'/images/dislike.png';
+                $dislikeImg = CHtml::image($imageUrl, 'dislike',array('width'=>25,'height'=>25));
+                echo CHtml::link($dislikeImg, '#', array('data-vote' => 2, 'class' => 'btn btn-small vote', 'rel'=>"tooltip", 'title'=>tt('No'))).' ';
+            }
 
             if($data['userAnswer']->answers->iteration_number == 1 && $data['userAnswer']->answer != 3)
-                echo CHtml::link(tt('revision'), '#', array('data-vote' => 3, 'class' => 'vote')).'<p>';
+                echo CHtml::link('revision', '#', array('data-vote' => 3, 'class' => 'btn btn-info vote')).'<p>';
         }
         ?>
     </div>
@@ -44,7 +63,7 @@
     <div id="answers-block">
         <?php 
                 foreach ($data['allAnswer'] as $answerName => $answerCount)
-                    echo tt($answerName).': '.$answerCount.'<p>';
+                    echo '<div>'.tt($answerName).': '.$answerCount.'</div>';
         ?>
     </div>
 
