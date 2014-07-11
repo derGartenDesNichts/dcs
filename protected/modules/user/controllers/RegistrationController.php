@@ -37,6 +37,8 @@ class RegistrationController extends Controller
             if(isset($_POST['RegistrationForm'])) {
                 $model->attributes=$_POST['RegistrationForm'];
                 $profile->attributes=((isset($_POST['Profile'])?$_POST['Profile']:array()));
+                $model->username = $model->email;
+
                 if($model->validate()&&$profile->validate())
                 {
                     $soucePassword = $model->password;
@@ -52,14 +54,16 @@ class RegistrationController extends Controller
 
                         if(isset($_POST['UserLocation']) && !empty($_POST['UserLocation']))
                         {
-                            UsersLocations::model()->deleteAllByAttributes(array('user_id'=>Yii::app()->user->id));
-
+                            $level = 1;
                             foreach($_POST['UserLocation'] as $location)
                             {
-                                $locModel = new UsersLocations;
+                                $locationModel = Locations::model()->findByAttributes(array('level_id'=>$level,'place_id'=>$location));
+                                $locationId = $locationModel->location_id;
+                                $locModel = new UsersLocations();
                                 $locModel->user_id = $model->id;
-                                $locModel->location_id = $location;
+                                $locModel->location_id = $locationId;
                                 $locModel->save();
+                                $level++;
                             }
                         }
 
@@ -73,7 +77,7 @@ class RegistrationController extends Controller
                                 ));
 
                             $link = CHtml::link('this link', $activation_url);
-
+/*
                             UserModule::sendMail(
                                 $model->email,
                                 UserModule::t(
@@ -86,7 +90,7 @@ class RegistrationController extends Controller
                                     array('{activation_url}'=>$link
                                     )
                                 )
-                            );
+                            );*/
                         }
 
                         if ((Yii::app()->controller->module->loginNotActiv||(Yii::app()->controller->module->activeAfterRegister&&Yii::app()->controller->module->sendActivationMail==false))&&Yii::app()->controller->module->autoLogin) {

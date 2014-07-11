@@ -95,13 +95,13 @@ $this->menu = $menu;
 
                         if($location->locations->level_id == 2)
                         {
-                            $district = Districts::model()->findByPk($location->location_id);
+                            $district = Districts::model()->findByPk($location->locations->place_id);
                             echo $district->name . '<br>';
                         }
 
                         if($location->locations->level_id == 3)
                         {
-                            $city = Cities::model()->findByPk($location->location_id);
+                            $city = Cities::model()->findByPk($location->locations->place_id);
                             echo $city->name . '<br>';
                         }
 

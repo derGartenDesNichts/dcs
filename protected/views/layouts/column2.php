@@ -6,7 +6,7 @@
 @var $newQuestions Questions */
 
 $this->pageTitle=Yii::app()->name;
-$avatar = '1';//Profile::model()->findByPk(Yii::app()->user->id)->getImageUrl(true);
+$avatar = Profile::model()->findByPk(Yii::app()->user->id)->getImageUrl(true);
 
 $this->menu=array(
     array('label'=>CHtml::image($avatar), 'url'=>'/user/profile'),

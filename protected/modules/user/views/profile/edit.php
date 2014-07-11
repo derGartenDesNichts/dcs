@@ -101,14 +101,14 @@ if(UserModule::isAdmin())
                 if($location->locations->level_id == 2)
                 {
                     echo '<label>'.tt('District').'</label>';
-                    echo LocationHelper::getDistricts($location->location_id);
-                    $districtId = $location->location_id;
+                    echo LocationHelper::getDistricts($location->locations->place_id);
+                    $districtId = $location->locations->place_id;
                 }
 
                 if($location->locations->level_id == 3)
                 {
                     echo '<label>'.tt('City').'</label>';
-                    echo LocationHelper::getCities($location->location_id, $districtId);
+                    echo LocationHelper::getCities($location->locations->place_id, $districtId);
                 }
 
             }

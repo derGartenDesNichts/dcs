@@ -33,9 +33,13 @@ $this->breadcrumbs=array(
 	
 	<?php echo $form->errorSummary(array($model,$profile)); ?>
 	
-	<?php echo $form->labelEx($model,'username'); ?>
+	<?php /*echo $form->labelEx($model,'username'); ?>
 	<?php echo $form->textField($model,'username'); ?>
-	<?php echo $form->error($model,'username'); ?>
+	<?php echo $form->error($model,'username');*/ ?>
+
+    <?php echo $form->labelEx($model,'email'); ?>
+    <?php echo $form->textField($model,'email'); ?>
+    <?php echo $form->error($model,'email'); ?>
 
 	<?php echo $form->labelEx($model,'password'); ?>
 	<?php echo $form->passwordField($model,'password'); ?>
@@ -47,10 +51,6 @@ $this->breadcrumbs=array(
 	<?php echo $form->labelEx($model,'verifyPassword'); ?>
 	<?php echo $form->passwordField($model,'verifyPassword'); ?>
 	<?php echo $form->error($model,'verifyPassword'); ?>
-
-	<?php echo $form->labelEx($model,'email'); ?>
-	<?php echo $form->textField($model,'email'); ?>
-	<?php echo $form->error($model,'email'); ?>
 
 <?php 
 		$profileFields=Profile::getFields();
