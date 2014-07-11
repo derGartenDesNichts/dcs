@@ -27,5 +27,7 @@ class Controller extends CController
             $_GET['language'] = 'ru';
 
         parent::init();
+
     }
+
 }

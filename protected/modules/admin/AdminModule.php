@@ -2,7 +2,8 @@
 
 class AdminModule extends CWebModule
 {
-	public function init()
+    public $layout='//layouts/column2f';
+    public function init()
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
@@ -16,6 +17,9 @@ class AdminModule extends CWebModule
 
 	public function beforeControllerAction($controller, $action)
 	{
+        if (!Yii::app()->user->isAdmin())
+            throw new CHttpException(403, 'Access denied.');
+
 		if(parent::beforeControllerAction($controller, $action))
 		{
 			// this method is called before any module controller action is performed

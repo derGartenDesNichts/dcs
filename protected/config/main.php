@@ -175,6 +175,10 @@ $config = array(
 				),
 			),
 		),
+        'session'=>array(
+            'class'=>'HttpSession'
+        ),
+
 	),
 
     'sourceLanguage'=>'en',
