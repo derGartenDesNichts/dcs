@@ -22,7 +22,7 @@ $config = array(
 		'application.components.*',
         'application.helpers.*',
         'application.extensions.*',
-		
+		'application.extensions.yiimailer.*',
 		'ext.EScriptBoost.*',
         'application.modules.user.models.*',
         'application.modules.user.components.*',

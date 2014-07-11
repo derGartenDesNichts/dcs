@@ -110,8 +110,27 @@ return array(
     'Cherkasy Oblast'=>'Черкасская область',
     'Chernivtsi Oblast'=>'Черниговская область',
     'Chernihiv Oblast'=>'Черновицкая область',
+    
+    
+    'revision'=>'Отправить на доработку',
+    'like'=>'За',
+    'dislike'=>'Против',
+    'likes'=>'За',
+    'dislikes'=>'Против',
+    'country'=>'страна',
+    'city'=>'город',
+    'district'=>'область',
+    'All comments'=>'комментариев',
 
-    'Send message' =>'Отправить сообщение'
+    'Send message' =>'Отправить сообщение',
+    'the voting ends in'=>'голосование истекает через',
+    'On Revision'=>'На Доработке',
+    'Denied'=>'Отклонены',
+    'question level'=>'уровень вопроса',
+    
+    
+    //''=>'',
+    
 
 
 );

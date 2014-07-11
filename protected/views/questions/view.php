@@ -1,13 +1,14 @@
 <div class="well">
     <div class="row-fluid" id="<?=$data['question']->question_id ?>">
 
-        <?php $this->renderPartial('_user_info',array('data'=>$data['question'])) ?>
+        <?php $this->renderPartial('_user_info',array('data'=>$data['question'], 'allAnswer' => $data['allAnswer'])) ?>
 
         <div class="span9">
             <div class="topic-heading">
                 <h4><?=$data['question']->title?></h4>
+                <?php echo tt('question level').': '.$data['question']->location_name;?>
                 <span class="muted">
-                    <i class="icon-time"></i> <?=DateFormatHelper::setCustomDate($data['question']->date_added) ?>
+                    <i class="icon-time"></i> <?php echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($data['userAnswer']->answers->date_last_update) ?>
                 </span>
             </div>
             <div class="content"><?=$data['question']->text?></div>
@@ -41,7 +42,7 @@
     <div id="answers-block">
         <?php 
                 foreach ($data['allAnswer'] as $answerName => $answerCount)
-                    echo $answerName.': '.$answerCount.'<p>';
+                    echo '<div>'.tt($answerName).': '.$answerCount.'</div>';
         ?>
     </div>
 

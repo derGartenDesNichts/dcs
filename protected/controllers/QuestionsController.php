@@ -2,8 +2,8 @@
 
 class QuestionsController extends Controller
 {
-
     public $defaultAction = 'home';
+    public $listItem = '';
     public $layout='//layouts/questions';
 
     /**
@@ -55,6 +55,8 @@ class QuestionsController extends Controller
             else
                 $question->iteration_count = 1;
             
+            $question->location_name = $location->area;
+            
             if($question->save()) {
                 
                 $answer = new Answers;
@@ -71,7 +73,14 @@ class QuestionsController extends Controller
                     $userAnswer->answer_id = $answer->answer_id;
                     $userAnswer->question_id = $question->question_id;
                     if($userAnswer->save()) {
-                        mail($user['email'], 'DCS: You have new vote', CHtml::link($question->title, $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id))));
+                        /*$mail = new YiiMailer();
+                        //$mail->clearLayout();//if layout is already set in config
+                        $mail->setFrom('functionw@contact.com', 'Direct COntrol System');
+                        $mail->setTo($user['email']);
+                        $mail->setSubject('DCS: You have new vote');
+                        $mail->setBody('Simple message');
+                        $mail->send();*/
+                        //mail($user['email'], 'DCS: You have new vote', $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id)));
                     }
                 }
                 
@@ -86,8 +95,10 @@ class QuestionsController extends Controller
     {
         $question = new Questions;
         
-        if(!Yii::app()->request->isAjaxRequest)
+        if(!Yii::app()->request->isAjaxRequest) {
+            $this->listItem = 'new';
             $this->render('list', array('questions' => $question->getQuestions('new')));
+        }
         else {
             $this->renderPartial('list', array( 'questions' => $question->getQuestions(str_replace('#', '', $_POST['type']))), false, true);
         }

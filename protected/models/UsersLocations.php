@@ -95,4 +95,6 @@ class UsersLocations extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+    
+    
 }
