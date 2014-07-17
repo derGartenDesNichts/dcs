@@ -34,7 +34,7 @@
             }
 
             if($data['userAnswer']->answers->iteration_number == 1 && $data['userAnswer']->answer != 3)
-                echo CHtml::link('revision', '#', array('data-vote' => 3, 'class' => 'btn btn-info vote')).'<p>';
+                echo CHtml::link(tt('revision'), '#', array('data-vote' => 3, 'class' => 'btn btn-info vote')).'<p>';
         }
         ?>
     </div>

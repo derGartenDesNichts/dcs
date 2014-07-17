@@ -16,8 +16,10 @@
     ?>
     <div id="answers-block">
         <?php 
+            if(isset($allAnswer)) {
                 foreach ($allAnswer as $answerName => $answerCount)
                     echo '<div>'.tt($answerName).': '.$answerCount.'</div>';
+            }
         ?>
     </div>
 </div>

@@ -29,7 +29,7 @@
         $this->widget('bootstrap.widgets.TbButton', array(
             'buttonType'=>'submit',
             'type'=>'primary',
-            'label'=>'Add Comment',
+            'label'=>tt('Add Comment'),
             'htmlOptions' => array(
                 'id'=>'save-btn'
             ),
@@ -37,7 +37,7 @@
         <?php
         $this->widget('bootstrap.widgets.TbButton', array(
             'type'=>'primary',
-            'label'=>'Cancel',
+            'label'=>tt('Cancel'),
             'htmlOptions' => array(
                 'id'=>'close-redactor',
                 'name'=>$answer_id

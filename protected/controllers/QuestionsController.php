@@ -80,7 +80,7 @@ class QuestionsController extends Controller
                         $mail->setSubject('DCS: You have new vote');
                         $mail->setBody('Simple message');
                         $mail->send();*/
-                        //mail($user['email'], 'DCS: You have new vote', $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id)));
+                        mail($user['email'], tt('DCS') - ('You have new vote').': '.$question->title, $this->createAbsoluteUrl('questions/view', array('id' => $question->question_id)));
                     }
                 }
                 

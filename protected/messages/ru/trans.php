@@ -127,6 +127,10 @@ return array(
     'On Revision'=>'На Доработке',
     'Denied'=>'Отклонены',
     'question level'=>'уровень вопроса',
+    'DCS'=>'DCS',
+    'You have new vote'=>'У Вас новое предложение для голосования',
+    'Add Comment' => 'Добавить комментарий',
+    'Cancel'=>'Отмена',
     
     
     //''=>'',
