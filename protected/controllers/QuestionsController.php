@@ -3,8 +3,35 @@
 class QuestionsController extends Controller
 {
     public $defaultAction = 'home';
-    public $layout='//layouts/questions';    
     public $listItem = '';
+    public $layout='//layouts/questions';
+
+    /**
+     * @return array action filters
+     */
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules()
+    {
+        return array(
+            array('allow',
+                'users'=>array('@'),
+            ),
+            array('deny',  // deny all users
+                'users'=>array('*'),
+            ),
+        );
+    }
+
 	public function actionNew()
 	{
 		$question = new Questions;

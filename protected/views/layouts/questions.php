@@ -1,5 +1,5 @@
 <?php /* @var $this Controller */ ?>
-<?php 
+<?php
 $this->beginContent('//layouts/column2'); 
 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . "/js/questions/layout.js");

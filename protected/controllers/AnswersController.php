@@ -3,7 +3,17 @@
 class AnswersController extends Controller
 {
     public $defaultAction = 'home';
-    public $layout='//layouts/questions';    
+    public $layout='//layouts/questions';
+
+    /**
+     * @return array action filters
+     */
+    public function filters()
+    {
+        return array(
+            'accessControl',
+        );
+    }
 
 	public function actionAddComment()
 	{

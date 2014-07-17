@@ -25,7 +25,7 @@ $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
 <?php echo $form->errorSummary($model, 'Following errors occurred'); ?>
 
     <div class="controls-row">
-        <?php echo $form->textField($model,'username', array('class'=>'input-block-level', 'placeholder'=>'Username or email')); ?>
+        <?php echo $form->textField($model,'username', array('class'=>'input-block-level', 'placeholder'=>'Email')); ?>
         <?php echo $form->error($model,'username'); ?>
     </div>
 

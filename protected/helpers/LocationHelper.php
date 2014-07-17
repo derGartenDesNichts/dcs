@@ -13,7 +13,7 @@ class LocationHelper
             $countrySet .='<option value="'.$country.'">'.$country.'</option>';
 
         $countrySet .='</select>';*/
-        $countrySet = '<select id="country" name="UserLocation[country]"><option value="1" selected>'.tt('Ukraine').'</option></select>';
+        $countrySet = '<select id="country" name="UserLocation[country]"><option value="0" selected>'.tt('Ukraine').'</option></select>';
 
         return $countrySet;
     }

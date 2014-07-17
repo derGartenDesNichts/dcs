@@ -34,7 +34,7 @@ $this->menu=array(
 				));
 		}
 	}
-	
+
 	array_push($attributes,
 		//'password',
 		'email',
@@ -48,13 +48,60 @@ $this->menu=array(
 		array(
 			'name' => 'status',
 			'value' => User::itemAlias("UserStatus",$model->status),
-		)
+		),
+        array(
+            'header' => 'superuser',
+            'value' => User::itemAlias("AdminStatus",$model->superuser),
+        ),
+        array(
+            'name' => 'status',
+            'value' => User::itemAlias("UserStatus",$model->status),
+        ),
+        array(
+            'name' => 'status',
+            'value' => User::itemAlias("UserStatus",$model->status),
+        )
 	);
-	
-	$this->widget('zii.widgets.CDetailView', array(
-		'data'=>$model,
-		'attributes'=>$attributes,
-	));
-	
+
+$this->widget('zii.widgets.CDetailView', array(
+    'data'=>$model,
+    'attributes'=>$attributes,
+));
+
+ if (!empty($model->users_locations)) : ?>
+     <table class="detail-view">
+         <tbody>
+             <tr class="odd">
+                 <th><?=tt('Country')?></th>
+                 <td><?=tt('Ukraine')?></td>
+             </tr>
+             <?php foreach ($model->users_locations as $location) {
+
+                 if($location->locations->level_id == 2)
+                 {
+                     $district = Districts::model()->findByPk($location->locations->place_id);?>
+                     <tr class="even">
+                         <th><?=tt('District')?></th>
+                         <td><?=$district->name?></td>
+                     </tr>
+           <?php }
+
+                 if($location->locations->level_id == 3)
+                 {
+                     $city = Cities::model()->findByPk($location->locations->place_id);?>
+                     <tr class="even">
+                         <th><?=tt('City')?></th>
+                         <td><?=$city->name?></td>
+                     </tr>
+           <?php }
+             }
+             ?>
+
+         </tbody>
+     </table>
+
+<?php endif;
+
+
 
 ?>

@@ -1,3 +1,10 @@
+<?php
+Yii::app()->clientScript->registerLocalScript('profileForm.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScript('assignment',
+    'var ajaxUrl = "'.Yii::app()->createUrl('/ajax/').'"',
+    CClientScript::POS_HEAD);
+
+?>
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -66,14 +73,14 @@
             if($location->locations->level_id == 2)
             {
                 echo '<label>'.tt('District').'</label>'.
-                LocationHelper::getDistricts($location->location_id);
-                $districtId = $location->location_id;
+                LocationHelper::getDistricts($location->locations->place_id);
+                $districtId = $location->locations->place_id;
             }
 
             if($location->locations->level_id == 3)
             {
                 echo '<label>'.tt('City').'</label>'.
-                LocationHelper::getCities($location->location_id, $districtId);
+                LocationHelper::getCities($location->locations->place_id, $districtId);
             }
 
         }
