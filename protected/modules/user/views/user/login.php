@@ -11,7 +11,7 @@ $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
     ),
 )); /* @var $form TbActiveForm */ ?>
 
-    <h1><?php echo UserModule::t("Login"); ?></h1>
+    <h3><?php echo UserModule::t("Login"); ?></h3>
 
 <?php if(Yii::app()->user->hasFlash('loginMessage') || Yii::app()->user->hasFlash('recoveryMessage')): ?>
 
@@ -37,15 +37,15 @@ $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
 <?php echo $form->checkBoxRow($model,'rememberMe'); ?>
 
     <div class="clearfix">
-        <?php $this->widget('bootstrap.widgets.TbButton', array(
+        <?php
+        $this->widget('bootstrap.widgets.TbButton', array(
             'buttonType'=>'submit',
-            'type'=>'primary',
-            'size'=>'large',
+            'type'=>'info',
             'label'=>'Login',
-            'htmlOptions'=>array('class'=>'pull-left'),
+            'htmlOptions'=>array('class'=>'btn'),
         )); ?>
         <ul class="action-links">
-            <?php //echo '<li>'.CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl).'</li>'; ?>
+            <?php echo '<li>'.CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl).'</li>'; ?>
             <?php echo '<li>'.CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl).'</li>'; ?>
         </ul>
     </div>

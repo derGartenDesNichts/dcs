@@ -3,6 +3,7 @@
 class MessagesController extends Controller
 {
     public $layout='//layouts/column2';
+    public $menuItem = 'main';
     public $currUserId;
 
     protected function beforeAction($action)

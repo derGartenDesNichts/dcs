@@ -2,6 +2,7 @@
 
 class ProfileController extends Controller
 {
+    public $menuItem = 'profile';
 	public $defaultAction = 'profile';
 	public $layout='//layouts/column2f';
 

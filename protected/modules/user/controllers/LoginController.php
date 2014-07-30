@@ -3,7 +3,7 @@
 class LoginController extends Controller
 {
 	public $defaultAction = 'login';
-
+    public $menuItem = 'login';
 	/**
 	 * Displays the login page
 	 */

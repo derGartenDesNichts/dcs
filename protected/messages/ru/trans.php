@@ -129,7 +129,7 @@ return array(
     'question level'=>'уровень вопроса',
     
     
-    //''=>'',
+    'All'=>'Все',
     
 
 
