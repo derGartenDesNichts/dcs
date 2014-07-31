@@ -177,3 +177,4 @@ class DelegatesController extends Controller
 		}
 	}
 }
+

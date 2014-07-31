@@ -10,7 +10,7 @@ $avatar = Profile::model()->findByPk(Yii::app()->user->id)->getImageUrl(true);
 
 $this->menu=array(
 
-    array('label'=>'<div>'.CHtml::image($avatar).'</div>', 'url'=>'/user/profile'),
+    array('label'=>'<div>'.CHtml::image($avatar).'</div>', 'url'=>Yii::app()->getBaseUrl().'/user/profile'),
     array('label'=>tt('Profile'), 'url'=>array('/user/profile')),
     array(
         'label'=>(Yii::app()->user->model()->amountOfUnreadMessages)? tt('My Messages').' <b>('.Yii::app()->user->model()->amountOfUnreadMessages.')</b>': tt('My Messages'),

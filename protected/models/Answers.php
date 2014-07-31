@@ -105,6 +105,6 @@ class Answers extends CActiveRecord
     
     public function getExpiredAnswers()
 	{		
-        return $this->findAll('date_last_update < DATE_SUB(CURRENT_DATE, INTERVAL '.Answers::ITERATION_TIME.' DAY) AND answers_array = ""');
+        return $this->findAll('date_last_update < DATE_SUB(NOW(), INTERVAL '.Answers::ITERATION_TIME.' DAY) AND answers_array = ""');
 	}
 }

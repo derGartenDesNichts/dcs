@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
+    <link rel="icon" type="image/png" href="/favicon.png">
     <?php
     Yii::app()->bootstrap->register();
     Yii::app()->clientScript->registerCssFile(Yii::app()->getBaseUrl() .'/css/styles.css');
@@ -117,22 +118,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

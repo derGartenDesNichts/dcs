@@ -4,7 +4,7 @@ class LanguageSwitcher
     public static function get()
     {
         $currentUrl = ltrim(Yii::app()->request->url, '/');
-        $links = '';
+        $links = '<div class="lang-switcher">';
         foreach (DMultilangHelper::suffixList() as $suffix => $name){
             $url = '/' . ($suffix ? trim($suffix, '_') . '/' : '') . $currentUrl;
 
@@ -15,6 +15,7 @@ class LanguageSwitcher
             $links .= ' '.CHtml::link($image, $url);
         }
 
+        $links .= '</div>';
         return $links;
     }
 }

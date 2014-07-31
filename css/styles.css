@@ -1,7 +1,14 @@
+.buy-box .half-box-holder:after,
+.buy-box .heading-box:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+
 body,html{height:100%;}
 body{
-	min-width:768px;
-	padding:0 !important;
+    min-width:768px;
+    padding:0 !important;
 }
 input[type=text], input[type=submit], input[type=button], input[type=password], input[type=file], textarea{-webkit-appearance:none;}
 textarea{
@@ -32,17 +39,18 @@ textarea{
 }
 
 .logo{
-	background: url("../images/logoDCS-3.jpg") 100% 100% no-repeat;
+	background: url("../images/dragonfly_Logo1.gif") 100% 100% no-repeat;
 	float: left;
-	height:80px;//67px;
-	margin: 0px 50px 0px 0px;
+	height:70px;
+	margin: 0px 60px 0px 0px;
 	overflow: hidden;
 	text-indent: -9999px;
-	width: 120px;//190px;
+	width: 180px;//112px;
     background-size: cover;
 }
 .logo a{
 	display:block;
+    height:100%;
 }
 .list-view{padding:0;}
 /* navigation */
@@ -103,19 +111,20 @@ textarea{
 }
 #wrapper .navbar .nav{
     height: 50px;
-    float: right;
+    float: left;
 }
 .navbar .nav > li{
 	position:relative;
 }
 #wrapper .navbar .nav>li>a{
     height: 50px;
-    background: #fff;//#41b1cc;
-	color: #000;//#fff;
+    background: #fff;
+	color: #000;
 	text-shadow:none;
 	-webkit-border-radius:3px;
 	border-radius:0px;
 	filter: none !important;
+    float: left;
 }
 #wrapper .navbar .nav>li>a:hover{
     color: #000;//fff;
@@ -255,6 +264,13 @@ textarea{
 	padding-bottom:0;
 }
 
+.img-rounded {
+    border-radius: 0px;
+}
+
+.user-title{
+    font-size: 14px;
+}
 /* two column layout */
 
 .main-col2 #content{
@@ -281,7 +297,6 @@ textarea{
 }
 .nav-side>li>a{
     color: #000;
-	//border:1px solid #e5e5e5;
 	margin:0 0 -1px;
 	padding:8px 14px;
 	text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);
@@ -593,8 +608,6 @@ textarea{
 
 #footer{
     background: #fff;//rgba(0, 72, 108, 0.98);
-	//-webkit-box-shadow:0 -1px 0 1px #cacbcc;
-    //box-shadow:0 -1px 0 1px #cacbcc;
 	text-align:center;
 	display:table-footer-group;
 	color:#000;
@@ -763,10 +776,60 @@ button.flat{
     box-shadow: none;
     text-shadow: none;
     margin-top: 10px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     text-align: center;
     height: 30px;
     width: 60px;
-    background-color: #28b9dd;
+    background-color: rgba(65, 177, 204, 0.83);
+    color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+a.flat{
+    border-radius: 1px;
+    border: 0;
+    box-shadow: none;
+    text-shadow: none;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    height: 30px;
+    width: 60px;
+    background-color: rgba(65, 177, 204, 0.83);
+    color: #fff;
+    padding: 8px 8px;
+    text-decoration: none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.flat:hover{
+    background-color: rgba(65, 177, 204, 0.60);
+}
+
+.flat.red{
+    background-color: rgba(204, 46, 38, 0.82);
+    width: 100px;
+}
+.flat.red:hover{
+    background-color: rgba(204, 46, 38, 0.63);
+    width: 100px;
+}
+
+.flat.grey{
+    background-color: rgba(65, 177, 204, 0.11);
+    margin: 0 3px 3px 0;
+}
+.flat.grey:hover{
+    background-color: rgba(65, 177, 204, 0.05);
+    margin: 0 3px 3px 0;
+}
+
+.flat.big{
+    width: 170px;
+}
+
+.lang-switcher{
+    float: right;
+}
+

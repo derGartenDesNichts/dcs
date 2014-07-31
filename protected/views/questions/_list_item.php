@@ -13,7 +13,10 @@ $allAnswer = UsersAnswers::model()->getCountOfAnswers($data->question_id);
                 <h4><?=CHtml::link($data->title, Yii::app()->createUrl('questions/view', array('id' => $data->question_id)))?></h4>
                 <?php echo tt('question level').': '.$data->location_name;?>
                 <span class="muted">
-                    <i class="icon-time"></i> <?php echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($userAnswer->answers->date_last_update) ?> <?php echo tt('All comments').' '.Comments::model()->getCommentsCount($data->question_id)?>
+                    <i class="icon-time"></i> <?php
+                    if(!empty($userAnswer->answers->date_last_update))
+                        echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($userAnswer->answers->date_last_update) ?>
+                    <?php echo tt('All comments').' '.Comments::model()->getCommentsCount($data->question_id)?>
                 </span>
             </div>
             <div class="content"><?php
@@ -28,7 +31,7 @@ $allAnswer = UsersAnswers::model()->getCountOfAnswers($data->question_id);
             </div>
 
             <div align="right">
-                <a class="btn btn-info" href="<?=Yii::app()->createUrl('questions/view', array('id' => $data->question_id))?>">
+                <a class="flat" href="<?=Yii::app()->createUrl('questions/view', array('id' => $data->question_id))?>">
                     <?=tt('Read More')?>
                 </a>
             </div>

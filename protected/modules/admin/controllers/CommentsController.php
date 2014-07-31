@@ -191,3 +191,4 @@ class CommentsController extends Controller
         echo CJSON::encode($array);
     }
 }
+

@@ -37,17 +37,17 @@ $this->pageTitle=Yii::app()->name . ' - '.UserModule::t("Login");
 <?php echo $form->checkBoxRow($model,'rememberMe'); ?>
 
     <div class="clearfix">
+        <p><button type="submit" class="flat">Login</button></p>
         <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
+        /*$this->widget('bootstrap.widgets.TbButton', array(
             'buttonType'=>'submit',
             'type'=>'info',
             'label'=>'Login',
             'htmlOptions'=>array('class'=>'btn'),
-        )); ?>
+        ));*/ ?>
         <ul class="action-links">
             <?php echo '<li>'.CHtml::link(UserModule::t("Register"),Yii::app()->getModule('user')->registrationUrl).'</li>'; ?>
             <?php echo '<li>'.CHtml::link(UserModule::t("Lost Password?"),Yii::app()->getModule('user')->recoveryUrl).'</li>'; ?>
         </ul>
     </div>
-
 <?php $this->endWidget(); ?>

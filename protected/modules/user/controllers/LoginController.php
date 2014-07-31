@@ -35,5 +35,4 @@ class LoginController extends Controller
 		$lastVisit->lastvisit_at = date('Y-m-d H:i:s');
 		$lastVisit->save();
 	}
-
 }

@@ -13,7 +13,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . "/js
         $new = false;
     
     $this->widget('bootstrap.widgets.TbTabs',array(
-            // 'htmlOptions'=>array('class'=>'nav-list nav-side nav'),
+            // 'htmlOptions'=>array('class'=>'clearfix'),
             'type'=>'tabs',
             'placement'=>'top',
             'tabs'=>array(
@@ -23,7 +23,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->request->baseUrl . "/js
                 array('label'=>tt('In Performing'), 'id'=>'performing','url'=>array('#')),
                 array('label'=>tt('Denied'), 'id'=>'denied','url'=>array('#')),
                 array('label'=>tt('On Revision'), 'id'=>'revision','url'=>array('#')),
-                array('label'=>tt('All'), 'id'=>'all','url'=>array('#')),
             ),
         )
     );
