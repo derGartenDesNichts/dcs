@@ -15,11 +15,23 @@
              </p>';
     ?>
     <div id="answers-block">
-        <?php 
+        <?php
+       // die(var_dump($data->userAnswer));
             if(isset($allAnswer)) {
                 foreach ($allAnswer as $answerName => $answerCount)
-                    echo '<p><b>'.tt($answerName).'</b>: '.$answerCount.'</p>';
+                    echo '<p><a href="#'.$answerName.'" id="'.$data->question_id.'" class="statistic '.$answerName.'"><b>'.tt($answerName).'</b></a>: '.$answerCount.'</p>';
             }
         ?>
     </div>
 </div>
+
+<script>
+    $('.statistic').unbind('click').on('click',function(){
+        var questionId = $(this).attr('id');
+        $.post("/questions/getVoteStatistic",
+            { questionId: questionId },
+            function(data){
+                $('#answers-block').after(data);
+            });
+    });
+</script>

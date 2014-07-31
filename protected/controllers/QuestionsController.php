@@ -121,4 +121,18 @@ class QuestionsController extends Controller
         
         $this->render('view', array('data' => $data));
     }
+
+    public function actionGetVoteStatistic()
+    {
+        $questionId = Yii::app()->request->getPost('questionId',null);
+
+        if($questionId)
+        {
+            $statistic = UsersAnswers::model()->getStatistic($questionId);
+
+
+        }
+
+        Yii::app()->end();
+    }
 }

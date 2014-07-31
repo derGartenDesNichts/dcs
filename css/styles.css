@@ -271,6 +271,9 @@ textarea{
 .user-title{
     font-size: 14px;
 }
+.statistic{
+    color: #000;
+}
 /* two column layout */
 
 .main-col2 #content{
