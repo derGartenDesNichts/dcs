@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
+    <link rel="icon" type="image/png" href="/favicon.png">
     <?php
     Yii::app()->bootstrap->register();
     Yii::app()->clientScript->registerCssFile(Yii::app()->getBaseUrl() .'/css/styles.css');
@@ -32,31 +33,36 @@
                             'label'=>tt('Home'),
                             'icon'=>'home',
                             'url'=>array('/site/index'),
-                            'visible'=>!Yii::app()->user->isGuest
+                            'visible'=>!Yii::app()->user->isGuest,
+                            'active'=>($this->menuItem == 'main') ? true : false
                         ),
                         array(
                             'label'=>tt('Admin'),
                             'icon'=>'cog',
                             'url'=>array('/admin/default/index'),
-                            'visible'=>Yii::app()->user->isAdmin()
+                            'visible'=>Yii::app()->user->isAdmin(),
+                            'active'=>($this->menuItem == 'admin') ? true : false
                         ),
                         array(
                             'label'=>tt('Profile'),
                             'icon'=>'user',
                             'url'=>array('/user/profile'),
-                            'visible'=>!Yii::app()->user->isGuest
+                            'visible'=>!Yii::app()->user->isGuest,
+                            'active'=>($this->menuItem == 'profile') ? true : false
                         ),
                         array(
                             'label'=>tt('Login'),
                             'icon'=>'ok',
                             'url'=>Yii::app()->getModule('user')->loginUrl,
-                            'visible'=>Yii::app()->user->isGuest
+                            'visible'=>Yii::app()->user->isGuest,
+                            'active'=>($this->menuItem == 'login') ? true : false
                         ),
                         array(
                             'label'=>tt('Registration'),
                             'icon'=>'pencil',
                             'url'=>Yii::app()->getModule('user')->registrationUrl,
-                            'visible'=>Yii::app()->user->isGuest
+                            'visible'=>Yii::app()->user->isGuest,
+                            'active'=>($this->menuItem == 'reg') ? true : false
                         ),
                         array(
                             'label'=>tt('Logout').' ('.Yii::app()->user->name.')',
@@ -112,22 +118,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

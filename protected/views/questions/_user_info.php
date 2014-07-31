@@ -4,7 +4,7 @@
             <?=$data->userProfile->first_name .' '. $data->userProfile->last_name ?>
         </a>
     </strong>
-    <img class="img-rounded" alt="" src="<?=$data->userProfile->imageUrl?>">
+    <p><img class="img-rounded" alt="" src="<?=$data->userProfile->imageUrl?>"></p>
     <?php
     $isCurrentUser = $data->user_id  == Yii::app()->user->id;
     if (!$isCurrentUser)
@@ -18,7 +18,7 @@
         <?php 
             if(isset($allAnswer)) {
                 foreach ($allAnswer as $answerName => $answerCount)
-                    echo '<div>'.tt($answerName).': '.$answerCount.'</div>';
+                    echo '<p><b>'.tt($answerName).'</b>: '.$answerCount.'</p>';
             }
         ?>
     </div>

@@ -56,9 +56,7 @@ foreach ($locations as $location)
 		<?php echo $form->error($data,'text'); ?>
 
 
-	<div class="buttons">
-		<?php echo CHtml::submitButton(tt('Submit')); ?>
-	</div>
+    <p><button type="submit" class="flat"><?=tt('Submit')?></button></p>
 
 <?php $this->endWidget(); ?>
 

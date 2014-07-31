@@ -3,7 +3,7 @@
 class RegistrationController extends Controller
 {
 	public $defaultAction = 'registration';
-	
+    public $menuItem = 'reg';
 	/**
 	 * Declares class-based actions.
 	 */

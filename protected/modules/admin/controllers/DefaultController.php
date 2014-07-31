@@ -2,6 +2,8 @@
 
 class DefaultController extends AdminController
 {
+    public $menuItem = 'admin';
+
     public function accessRules()
     {
         return array(
@@ -22,4 +24,5 @@ class DefaultController extends AdminController
 	{
         $this->render('index');
 	}
+
 }

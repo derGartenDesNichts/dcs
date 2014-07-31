@@ -26,23 +26,25 @@
 
     <div class="form-actions">
         <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
+       /* $this->widget('bootstrap.widgets.TbButton', array(
             'buttonType'=>'submit',
-            'type'=>'primary',
+            'type'=>'info',
             'label'=>tt('Add Comment'),
             'htmlOptions' => array(
                 'id'=>'save-btn'
             ),
-        )); ?>
+        ));*/ ?>
+        <p><button type="submit" class="flat big" id='save-btn'><?=tt('Add Comment')?></button>
+        <button type="submit" class="flat red" id='close-redactor' name="<?=$answer_id?>"><?=tt('Cancel')?></button></p>
         <?php
-        $this->widget('bootstrap.widgets.TbButton', array(
-            'type'=>'primary',
+        /*$this->widget('bootstrap.widgets.TbButton', array(
+            'type'=>'danger',
             'label'=>tt('Cancel'),
             'htmlOptions' => array(
                 'id'=>'close-redactor',
                 'name'=>$answer_id
             ),
-        )); ?>
+        ));*/ ?>
     </div>
 
 

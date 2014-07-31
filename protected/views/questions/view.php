@@ -14,8 +14,10 @@
             <div class="content"><?=$data['question']->text?></div>
         </div>
     </div>
-
+    <br>
+    <br>
     <div id="vote-block">
+        <p>
         <?php
         if(!$data['userAnswer']->answers->answers_array) {
 
@@ -23,30 +25,31 @@
             {
                 $imageUrl = Yii::app()->baseUrl.'/images/like.png';
                 $likeImg = CHtml::image($imageUrl, 'like',array('width'=>25,'height'=>25));
-                echo CHtml::link($likeImg, '#', array('data-vote' => 1, 'class' => 'btn btn-small vote', 'rel'=>"tooltip", 'title'=>tt('Yes'))).' ';
+                echo CHtml::link($likeImg, '#', array('data-vote' => 1, 'class' => 'flat grey vote', 'rel'=>"tooltip", 'title'=>tt('Yes')));
             }
 
             if($data['userAnswer']->answer != 2)
             {
                 $imageUrl = Yii::app()->baseUrl.'/images/dislike.png';
                 $dislikeImg = CHtml::image($imageUrl, 'dislike',array('width'=>25,'height'=>25));
-                echo CHtml::link($dislikeImg, '#', array('data-vote' => 2, 'class' => 'btn btn-small vote', 'rel'=>"tooltip", 'title'=>tt('No'))).' ';
+                echo CHtml::link($dislikeImg, '#', array('data-vote' => 2, 'class' => 'flat grey vote', 'rel'=>"tooltip", 'title'=>tt('No')));
             }
 
             if($data['userAnswer']->answers->iteration_number == 1 && $data['userAnswer']->answer != 3)
-                echo CHtml::link(tt('revision'), '#', array('data-vote' => 3, 'class' => 'btn btn-info vote')).'<p>';
+                echo CHtml::link(tt('revision'), '#', array('data-vote' => 3, 'class' => 'flat vote'));
         }
         ?>
+        </p>
     </div>
     
     <div id="answers-block">
         <?php 
-                foreach ($data['allAnswer'] as $answerName => $answerCount)
-                    echo '<div>'.tt($answerName).': '.$answerCount.'</div>';
+            /*    foreach ($data['allAnswer'] as $answerName => $answerCount)
+                    echo '<div>'.tt($answerName).': '.$answerCount.'</div>';*/
         ?>
     </div>
 
-    <div align="right"><a class="btn btn-info" href="#post-reply" id="post-reply"><?php echo tt('Add Comment') ?></a></div>
+    <div align="right"><a class="flat" href="#post-reply" id="post-reply"><?php echo tt('Add Comment') ?></a></div>
 
 </div>
 
@@ -83,6 +86,10 @@ $this->widget('bootstrap.widgets.TbListView', array(
 
      $('#post-reply').on('click',function(){
          $('#comment').removeClass('hidden');
+     });
+
+     $('#close-redactor').on('click',function(){
+         $('#comment').addClass('hidden');
      });
 
 

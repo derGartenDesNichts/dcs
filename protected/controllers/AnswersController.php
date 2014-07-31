@@ -3,6 +3,7 @@
 class AnswersController extends Controller
 {
     public $defaultAction = 'home';
+    public $menuItem = 'main';
     public $layout='//layouts/questions';
 
     /**
