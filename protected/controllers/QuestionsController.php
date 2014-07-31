@@ -5,6 +5,7 @@ class QuestionsController extends Controller
     public $defaultAction = 'home';
     public $listItem = '';
     public $layout='//layouts/questions';
+    public $menuItem = '';
 
     /**
      * @return array action filters
