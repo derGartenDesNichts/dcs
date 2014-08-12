@@ -121,6 +121,7 @@ return array(
     'city'=>'город',
     'district'=>'область',
     'All comments'=>'комментариев',
+    'Statistic'=>'Статистика',
 
     'Send message' =>'Отправить сообщение',
     'the voting ends in'=>'голосование истекает через',

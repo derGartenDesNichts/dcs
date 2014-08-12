@@ -141,7 +141,7 @@ SQL;
 
     public function getStatistic($questionId)
     {
-        $params = array('1'=>'likes','2'=>'dislikes','3'=>'ref');
+        $params = array('1'=>'likes','2'=>'dislikes','3'=>'revision');
         $statistic = array();
 
         foreach($params as $key=>$param)

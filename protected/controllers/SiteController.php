@@ -3,7 +3,7 @@
 class SiteController extends Controller
 {
     public $defaultAction = 'home';
-
+    public $menuItem = 'main';
 
     /**
      * @return array action filters

@@ -15,13 +15,16 @@
              </p>';
     ?>
     <div id="answers-block">
+        <p>
         <?php
        // die(var_dump($data->userAnswer));
             if(isset($allAnswer)) {
                 foreach ($allAnswer as $answerName => $answerCount)
-                    echo '<p><a href="#'.$answerName.'" id="'.$data->question_id.'" class="statistic '.$answerName.'"><b>'.tt($answerName).'</b></a>: '.$answerCount.'</p>';
+                    echo '<b>'.tt($answerName).'</b></a>: '.$answerCount.'<br>';
             }
         ?>
+            <a href="#<?=$answerName?>" id="<?=$data->question_id?>" class="statistic <?=$answerName?>"><?=tt('Statistic')?></a>
+        </p>
     </div>
 </div>
 
