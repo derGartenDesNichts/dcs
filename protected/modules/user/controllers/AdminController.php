@@ -6,6 +6,8 @@ class AdminController extends Controller
 	public $layout='//layouts/column2f';
 	
 	private $_model;
+    
+    public $menuItem;
 
 	/**
 	 * @return array action filters
@@ -25,7 +27,7 @@ class AdminController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','create','update','view'),
+				'actions'=>array('admin','delete','create','update','view','activate'),
 				'users'=>UserModule::getAdmins(),
 			),
 			array('deny',  // deny all users
@@ -208,4 +210,27 @@ class AdminController extends Controller
 		return $this->_model;
 	}
 	
+    public function actionActivate($id)
+	{
+		$user = User::model()->findbyPk($_GET['id']);
+        
+        if($user->status) {
+            $user->status = 0;
+            $message = 'Your account deactivated by admin';
+        }
+        else {
+            $message = 'Your account activated by admin';
+            $user->status = 1;
+        }
+        UserModule::sendMail(
+            $user->email,
+            UserModule::t(
+                $message),
+            UserModule::t(
+                $message
+            )
+        );
+        
+        return $user->save();
+	}
 }

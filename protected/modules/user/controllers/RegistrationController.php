@@ -78,7 +78,7 @@ class RegistrationController extends Controller
                                 ));
 
                             $link = CHtml::link('this link', $activation_url);
-/*
+
                             UserModule::sendMail(
                                 $model->email,
                                 UserModule::t(
@@ -91,7 +91,7 @@ class RegistrationController extends Controller
                                     array('{activation_url}'=>$link
                                     )
                                 )
-                            );*/
+                            );
                         }
 
                         if ((Yii::app()->controller->module->loginNotActiv||(Yii::app()->controller->module->activeAfterRegister&&Yii::app()->controller->module->sendActivationMail==false))&&Yii::app()->controller->module->autoLogin) {

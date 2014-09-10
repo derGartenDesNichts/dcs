@@ -24,6 +24,16 @@ $('.search-form form').submit(function(){
 });
 ");
 
+Yii::app()->clientScript->registerScript('search', "
+$('.activate-user').click(function(){
+    var url = $(this).data('url');
+    $.post(url, {}, function(response) {
+        $.fn.yiiGridView.update('user-grid');
+    });
+    return false;
+});	
+");
+
 ?>
 <h1><?php echo UserModule::t("Manage Users"); ?></h1>
 
@@ -65,8 +75,9 @@ $('.search-form form').submit(function(){
 		),
 		array(
 			'name'=>'status',
-			'value'=>'User::itemAlias("UserStatus",$data->status)',
+			'value'=>'CHtml::link(User::itemAlias("UserStatus",$data->status), "#", array("data-url" => Yii::app()->controller->createUrl("activate", array("id"=>$data->id)), "class" => "activate-user"))',
 			'filter' => User::itemAlias("UserStatus"),
+            'type' => 'raw',
 		),
 		array(
 			'class'=>'CButtonColumn',

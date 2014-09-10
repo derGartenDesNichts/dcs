@@ -5,7 +5,8 @@ class AdminController extends Controller
     public $layout='//layouts/column2f';
 
     protected  $_model;
-
+    
+    public $menuItem;
     /**
      * @return array action filters
      */
