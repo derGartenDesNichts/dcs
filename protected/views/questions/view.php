@@ -8,7 +8,13 @@
                 <h4><?=$data['question']->title?></h4>
                 <?php echo tt('question level').': '.$data['question']->location_name;?>
                 <span class="muted">
-                    <i class="icon-time"></i> <?php echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($data['userAnswer']->answers->date_last_update) ?>
+                    <i class="icon-time"></i> <?php
+                    if(!empty($data['userAnswer']->answers->date_last_update))
+                        echo tt('the voting ends in').': '.DateFormatHelper::getExpiredDate($data['question']->date_added, $data['question']->iteration_count);
+                    
+                    if($data['userAnswer']->answers->iteration_number != $data['question']->iteration_count)  
+                        echo '</br><i class="icon-time"></i> '.tt('the voting of current iteration ends in').': '.DateFormatHelper::getExpiredDate($data['userAnswer']->answers->date_last_update);
+                    ?>
                 </span>
             </div>
             <div class="content"><?=$data['question']->text?></div>

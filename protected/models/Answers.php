@@ -103,8 +103,8 @@ class Answers extends CActiveRecord
 		return parent::model($className);
 	}
     
-    public function getExpiredAnswers()
+    public function getExpiredAnswers($type='')
 	{		
-        return $this->findAll('date_last_update < DATE_SUB(NOW(), INTERVAL '.Answers::ITERATION_TIME.' DAY) AND answers_array = ""');
+        return $this->findAll('date_last_update < DATE_SUB(NOW(), INTERVAL '.Answers::ITERATION_TIME.' DAY) AND answers_array = "'.$type.'"');
 	}
 }

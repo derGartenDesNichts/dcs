@@ -124,12 +124,19 @@ return array(
 
     'Send message' =>'Отправить сообщение',
     'the voting ends in'=>'голосование истекает через',
+    'the voting of current iteration ends in'=>'голосование по текущей итерации истекает через',
     'On Revision'=>'На Доработке',
     'Denied'=>'Отклонены',
     'question level'=>'уровень вопроса',
     
+    'no comments' => 'нет комментариев',
     
     'All'=>'Все',
+    
+    'Add Comment'=>'Добавить комментарий',
+    'Cancel'=>'Отмена',
+    'Current iteration'=>'Текущая итерация',
+    'of' => 'из',
     
 
 

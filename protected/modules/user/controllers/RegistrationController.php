@@ -35,6 +35,7 @@ class RegistrationController extends Controller
             $this->redirect(Yii::app()->controller->module->profileUrl);
         } else {
             if(isset($_POST['RegistrationForm'])) {
+                //die(var_dump($_POST));
                 $model->attributes=$_POST['RegistrationForm'];
                 $profile->attributes=((isset($_POST['Profile'])?$_POST['Profile']:array()));
                 $model->username = $model->email;

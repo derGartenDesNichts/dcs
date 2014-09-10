@@ -227,14 +227,19 @@ SQL;
         return $users;
     }
     
-    public function getRandomUsersByLocation($locationId, $limit = 100) {
+    public function getRandomUsersByLocation($locationId, $limit = 100, $questionId = null) {
         $table = $this->tableName();               
+        
+        $question = '';
+        
+        if($questionId)
+            $question = 'AND u.id NOT IN (SELECT `user_id` FROM users_answers WHERE question_id = '.$questionId.' )';
         
         $sql = <<<SQL
                 SELECT u.id, u.email 
                 FROM {$table} u
                     INNER JOIN users_locations s ON (s.user_id = u.id)
-                WHERE s.location_id = :locationId AND u.superuser != 1 ORDER BY RAND() LIMIT {$limit};
+                WHERE s.location_id = :locationId AND u.superuser != 1 {$question} ORDER BY RAND() LIMIT {$limit};
 SQL;
         $command = Yii::app()->db->createCommand($sql);
         $command->bindValue(':locationId', $locationId);

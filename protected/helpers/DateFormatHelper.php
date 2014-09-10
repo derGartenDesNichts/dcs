@@ -7,9 +7,9 @@ class DateFormatHelper
         return date('j.m.Y H:i', strtotime($date));
     }
     
-    public static function getExpiredDate($date)
+    public static function getExpiredDate($date, $iteration = 1)
     {
-        return self::downcounter(date('j.m.Y H:i', strtotime('+ '.Answers::ITERATION_TIME.' day', strtotime($date))));
+        return self::downcounter(date('j.m.Y H:i', strtotime('+ '.Answers::ITERATION_TIME*$iteration.' day', strtotime($date))));
     }
     
     public static function downcounter($date){
