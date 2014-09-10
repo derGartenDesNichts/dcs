@@ -5,7 +5,7 @@ class QuestionsController extends Controller
     public $defaultAction = 'home';
     public $listItem = '';
     public $layout='//layouts/questions';
-    public $menuItem = '';
+    public $menuItem = 'main';
 
     /**
      * @return array action filters
@@ -120,5 +120,27 @@ class QuestionsController extends Controller
         $data['question'] = $question;
         
         $this->render('view', array('data' => $data));
+    }
+
+    public function actionGetVoteStatistic()
+    {
+        $questionId = Yii::app()->request->getPost('questionId',null);
+
+        if($questionId)
+        {
+            $statistics = UsersAnswers::model()->getStatistic($questionId);
+
+            foreach($statistics as $type=>$statistic)
+            {
+                echo '<p>'.tt($type).': ';
+                foreach($statistic as $s)
+                    echo '<a href="'.Yii::app()->createUrl('/user/profile/userProfile', array('id'=>$s['user_id'])).'">'.
+                        $s['first_name'].' '.$s['last_name'].
+                        '</a> ';
+                echo '</p>';
+            }
+        }
+
+        Yii::app()->end();
     }
 }

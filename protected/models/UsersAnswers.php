@@ -138,4 +138,22 @@ SQL;
         
         return $data;
     }
+
+    public function getStatistic($questionId)
+    {
+        $params = array('1'=>'likes','2'=>'dislikes','3'=>'revision');
+        $statistic = array();
+
+        foreach($params as $key=>$param)
+        {
+            $statistic[$param] = Yii::app()->db->createCommand()
+                ->select('t.user_id, p.last_name, p.first_name')
+                ->from('users_answers t')
+                ->where('question_id LIKE :questionId AND answer = :key', array(':questionId'=>$questionId,':key'=>$key))
+                ->join('profiles p','p.user_id=t.user_id')
+                ->queryAll();
+        }
+
+        return $statistic;
+    }
 }
