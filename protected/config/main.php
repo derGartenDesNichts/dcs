@@ -87,10 +87,10 @@ $config = array(
 			),
 		),
 		'db'=>array(
-			'connectionString' => 'mysql:host=function.mysql.ukraine.com.ua;dbname=function_dcs',
+			'connectionString' => 'mysql:host=localhost;dbname=dcs',
 			'emulatePrepare' => true,
-			'username' => 'function_dcs',
-			'password' => '4yhvh7y3',
+			'username' => 'root',
+			'password' => '',
 			'charset' => 'utf8',
 			'schemaCachingDuration' => !YII_DEBUG ? 86400 : 0,
 			'enableParamLogging' => YII_DEBUG,
