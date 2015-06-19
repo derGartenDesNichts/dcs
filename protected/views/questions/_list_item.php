@@ -7,7 +7,7 @@ $allAnswer = UsersAnswers::model()->getCountOfAnswers($data->question_id);
 <div class="well">
     <div class="row-fluid" id="<?=$data->question_id?>">
 
-        <?php $this->renderPartial('_user_info',array('data'=>$data, 'allAnswer' => $allAnswer)) ?>
+        <?php  $this->renderPartial('user_info/_list',array('data'=>$data, 'allAnswer' => $allAnswer)) ?>
         <div class="span9">
             <div class="topic-heading">
                 <h4><?=CHtml::link($data->title, Yii::app()->createUrl('questions/view', array('id' => $data->question_id)))?></h4>

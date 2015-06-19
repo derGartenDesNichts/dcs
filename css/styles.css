@@ -25,7 +25,7 @@ textarea{
 	display:table-row;
 }
 .w1>.container{
-	padding:90px 0 40px;
+	padding:90px 0 0px;
 }
 #wrapper{
 	display:table;
@@ -536,6 +536,7 @@ textarea{
 
 .topic-list{
 	word-wrap:break-word;
+
 }
 .topic-list .user-title{
 	display:block;
@@ -834,5 +835,85 @@ a.flat{
 
 .lang-switcher{
     float: right;
+}
+
+
+.comm .items span.empty {
+    font-size: 20px;
+    font-style: italic;
+    margin-left: 185px;
+}
+#well-left {
+    float: left;
+    width: 569px;
+    max-height: 736px;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+    padding: 10px;
+}
+.comm_form {
+    float: right;
+    height: 182px;
+    width: 575px;
+
+}
+.comm {
+    
+    float: right;
+    max-height: 576px;
+    width: 575px;
+    overflow-x: hidden;
+}
+#vote-block {
+    float: left;
+    width: 300px;
+}
+
+#well-left div[align="right"] {
+    float: right;
+    margin-top: 50px;
+}
+.comm .well {
+    margin-bottom: 5px;
+    padding: 5px 20px 0 5px;
+}
+.span9 > div[align="right"] {
+    margin-top: 25px;
+}
+#page {
+    width: 1170px;
+}
+.row-fluid.comment-user {
+    text-align: justify;
+    padding: 3px 0 10px 5px;
+}
+.row-fluid.comment-user div {
+    border-bottom: 1px solid #dcdcdc;
+    height: 30px;
+    margin-left: 111px;
+    margin-bottom: 13px;
+    width: 421px;
+}
+.comment-time {
+    float: right;
+}
+.comment-user-avatar {
+    float: left;
+    margin: 1px 12px 4px 0;
+}
+.content, .content-view {
+    text-align: justify;
+}
+
+
+
+@media (min-width: 735px;){
+    .comm {
+        overflow: scroll;
+    }
+    #well-left {
+        overflow: scroll;
+    }
 }
 

@@ -107,6 +107,9 @@ class QuestionsController extends Controller
     
     public function actionView($id)
     {
+        
+        $this->layout='//layouts/questions/view';
+        
         if(isset($_GET['voteId'])) {
             $vote = UsersAnswers::model()->findByPk($_GET['voteId']);
             $vote->answer = $_GET['vote'];

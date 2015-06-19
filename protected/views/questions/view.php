@@ -1,12 +1,14 @@
-<div class="well">
-    <div class="row-fluid" id="<?=$data['question']->question_id ?>">
+<div class="well" id="well-left">
+    <div class="row-fluid row-fluid-view" id="<?=$data['question']->question_id ?>">
 
-        <?php $this->renderPartial('_user_info',array('data'=>$data['question'], 'allAnswer' => $data['allAnswer'])) ?>
-
+        <?php $this->renderPartial('user_info/_view',array('data'=>$data['question'], 'allAnswer' => $data['allAnswer'])) ?>
+        
         <div class="span9">
-            <div class="topic-heading">
+            <div class="topic-heading-view">
                 <h4><?=$data['question']->title?></h4>
                 <?php echo tt('question level').': '.$data['question']->location_name;?>
+                <br>
+                <br>
                 <span class="muted">
                     <i class="icon-time"></i> <?php
                     if(!empty($data['userAnswer']->answers->date_last_update))
@@ -17,11 +19,12 @@
                     ?>
                 </span>
             </div>
-            <div class="content"><?=$data['question']->text?></div>
+            <div class="content-view"><?=$data['question']->text?></div>
         </div>
+            
     </div>
     <br>
-    <br>
+
     <div id="vote-block">
         <p>
         <?php
@@ -54,9 +57,9 @@
                     echo '<div>'.tt($answerName).': '.$answerCount.'</div>';*/
         ?>
     </div>
-
+<!--
     <div align="right"><a class="flat" href="#post-reply" id="post-reply"><?php echo tt('Add Comment') ?></a></div>
-
+-->
 </div>
 
 <?php
@@ -72,7 +75,7 @@ $this->widget('bootstrap.widgets.TbListView', array(
     'ajaxUpdate' => false,
     'emptyText' => tt('no comments'),
     'htmlOptions' => array(
-        'class' => 'topic-list'
+        'class' => 'topic-list comm',
     ),
 ));
 ?>
@@ -89,14 +92,15 @@ $this->widget('bootstrap.widgets.TbListView', array(
             }
         });
      });
-
-     $('#post-reply').on('click',function(){
+/*
+     $('#post-reply').on('click',function(e){
          $('#comment').removeClass('hidden');
+         e.preventDefault();
      });
 
      $('#close-redactor').on('click',function(){
          $('#comment').addClass('hidden');
      });
-
+*/
 
 </script>

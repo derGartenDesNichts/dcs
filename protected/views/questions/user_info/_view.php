@@ -4,7 +4,7 @@
             <?=$data->userProfile->first_name .' '. $data->userProfile->last_name ?>
         </a>
     </strong>
-    <p><img class="img-rounded" alt="" src="<?=$data->userProfile->imageUrl?>"></p>
+    <img class="img-rounded" alt="" src="<?=$data->userProfile->imageUrl?>">
     <?php
     $isCurrentUser = $data->user_id  == Yii::app()->user->id;
     if (!$isCurrentUser)
@@ -23,9 +23,10 @@
                     echo '<b>'.tt($answerName).'</b></a>: '.$answerCount.'<br>';
             }
         ?>
-            <a href="#<?=$answerName?>" id="<?=$data->question_id?>" class="statistic <?=$answerName?>"><?=tt('Statistic')?></a>
         </p>
     </div>
+    
+    
 </div>
 
 <script>

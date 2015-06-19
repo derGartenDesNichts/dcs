@@ -1,5 +1,7 @@
 <?php
-define('YII_DEBUG', true);
+
+
+define('YII_DEBUG', false);
 // Debug is on when remote address is localhost
 defined('YII_DEBUG') or $_SERVER['REMOTE_ADDR'] === '127.0.0.1' and define('YII_DEBUG', true);
 defined('YII_DEBUG') or $_SERVER['REMOTE_ADDR'] === '::1' and define('YII_DEBUG', true);

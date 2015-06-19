@@ -23,7 +23,6 @@
                     echo '<b>'.tt($answerName).'</b></a>: '.$answerCount.'<br>';
             }
         ?>
-            <a href="#<?=$answerName?>" id="<?=$data->question_id?>" class="statistic <?=$answerName?>"><?=tt('Statistic')?></a>
         </p>
     </div>
 </div>

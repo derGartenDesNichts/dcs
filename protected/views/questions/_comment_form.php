@@ -1,6 +1,7 @@
-<div class="hidden" id="comment">
+<div class="comm_form" id="comment">
     <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
         'id'=>'comment-form',
+        
         'enableAjaxValidation'=>false,
         'action'=>Yii::app()->createUrl('/answers/AddComment',array('answer_id'=>$answer_id,))
     ));
@@ -34,9 +35,8 @@
                 'id'=>'save-btn'
             ),
         ));*/ ?>
-        <p><button type="submit" class="flat big" id='save-btn'><?=tt('Add Comment')?></button>
-        <button type="submit" class="flat red" id='close-redactor' name="<?=$answer_id?>"><?=tt('Cancel')?></button></p>
-        <?php
+        <button type="submit" class="flat big" id='save-btn'><?=tt('Add Comment')?></button>
+                <?php
         /*$this->widget('bootstrap.widgets.TbButton', array(
             'type'=>'danger',
             'label'=>tt('Cancel'),

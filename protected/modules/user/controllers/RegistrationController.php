@@ -56,14 +56,17 @@ class RegistrationController extends Controller
                         if(isset($_POST['UserLocation']) && !empty($_POST['UserLocation']))
                         {
                             $level = 1;
+                            
                             foreach($_POST['UserLocation'] as $location)
                             {
                                 $locationModel = Locations::model()->findByAttributes(array('level_id'=>$level,'place_id'=>$location));
-                                $locationId = $locationModel->location_id;
-                                $locModel = new UsersLocations();
-                                $locModel->user_id = $model->id;
-                                $locModel->location_id = $locationId;
-                                $locModel->save();
+                                if($locationModel) {
+                                    $locationId = $locationModel->location_id;
+                                    $locModel = new UsersLocations();
+                                    $locModel->user_id = $model->id;
+                                    $locModel->location_id = $locationId;
+                                    $locModel->save();
+                                }
                                 $level++;
                             }
                         }
